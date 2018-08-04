@@ -1,0 +1,31 @@
+<view class='page'>
+  <view class="page__hd">
+    <view class="page__title">信息共享</view>
+    <view class="page__desc">现场信息共享</view>
+  </view>
+  <view class="page__bd">
+    <view class='infogp'>
+    
+     <view class="weui-cells__title">信息板块</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_access" bindtap='watchcommandnews' hover-class="weui-cell_active">
+                <view class="weui-cell__bd" style='color:#C00000;font-weight:bold;'>1、指挥部通知</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+            <view  class="weui-cell weui-cell_access" bindtap='watchnormalnews' hover-class="weui-cell_active">
+                <view class="weui-cell__bd">2、灾情共享</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+              <view  class="weui-cell weui-cell_access" bindtap='newsupload' hover-class="weui-cell_active">
+                <view class="weui-cell__bd">3、信息上传</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+               <view  class="weui-cell weui-cell_access"  bindtap='mynews' hover-class="weui-cell_active">
+                <view class="weui-cell__bd">4、我发布的</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+        </view>
+    </view>
+
+  </view>
+</view>

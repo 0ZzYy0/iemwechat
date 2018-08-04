@@ -1,0 +1,7 @@
+.page__hd {
+  left: 0;
+  right: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+   border-bottom: 1px solid #129fff; 
+}

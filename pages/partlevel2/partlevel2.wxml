@@ -1,0 +1,17 @@
+<!--pages/partlevel2/partlevel2.wxml-->
+<view class='page'>
+  <view class="page__hd">
+    <view class="page__title">细部震损</view>
+    <view class="page__desc">{{parts[0].fatherName}}</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-cells  weui-cells_after-title">
+      <block wx:for="{{parts}}" wx:key="id">
+        <navigator url='/pages/partlevel3/partlevel3?fid={{item.id}}&assessId={{assessId}}' class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__bd">{{item.partType}}{{item.typeName}}</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">点击进入</view>
+        </navigator>
+      </block>
+    </view>
+  </view>
+</view>

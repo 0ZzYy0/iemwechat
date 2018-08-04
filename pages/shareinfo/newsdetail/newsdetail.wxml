@@ -1,0 +1,25 @@
+<!--pages/shareinfo/newsdetail/newsdetail.wxml-->
+<import src="../../../wxParse/wxParse.wxml" />
+<view class='page'>
+  <view class='pagetitle_hd'>
+    <view class="page__title" style='font-size:20px;word-wrap: break-word;word-break: break-all;'>{{news.newsTitle}}
+    </view>
+    <view class="minititle">{{news.dateTime}}</view>
+    <view class="minititle">类型: {{news.newsType}}</view>
+    <view class="minititle">作者: {{news.authorName}}</view>
+    <view class="minititle">小组: {{news.authorGroup}}</view>
+    <view class="minititle">工作单位: {{news.authorDepartment}}</view>
+    <view class="minititle">经度: {{news.lng}}</view>
+    <view class="minititle">纬度: {{news.lat}}</view>
+    <view class="minititle">位置: {{news.address}}</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-article">
+      <view class="weui-article__p" style="">
+        <template is="wxParse" data="{{wxParseData:newsContent.nodes}}" />
+      </view>
+      <view class="weui-panel__ft" wx-if="{{newsContent}}">
+      </view>
+    </view>
+  </view>
+</view>

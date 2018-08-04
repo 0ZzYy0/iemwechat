@@ -1,0 +1,73 @@
+<!--pages/partlevel2/partlevel2.wxml-->
+<view class='page'>
+  <view class="page__hd">
+    <view class="page__title">细部震损</view>
+    <view class="page__desc">{{detailPartInfo.partTypeName}}</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <radio-group style='display:inline-block;' bindchange="bindRadioChange">
+          <radio style='margin-left:60rpx;' value='intuited' checked='{{!detailPartInfo.damaged}}'>无震损</radio>
+          <radio style='margin-left:60rpx;' value='notIntuited' checked='{{detailPartInfo.damaged}}'>有震损</radio>
+        </radio-group>
+      </view>
+    </view>
+
+    <view wx:if="{{detailPartInfo.damaged}}">
+      <block wx:for="{{damages}}" wx:key="id">
+        <view class='block_body'>
+          <view class="weui-cells__title" >数量<icon type="cancel" style='margin-left:500rpx;' bindtap='remove' data-idx='{{index}}' size="23"></icon></view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell " hover-class="weui-cell_active">
+              <radio-group style='display:inline-block;'  data-idx='{{index}}' bindchange="bindNumberChange">
+                <radio style='margin-left:60rpx;' value='个别' checked="{{item.number=='个别'}}">个别</radio>
+                <radio style='margin-left:60rpx;'  value='少数' checked="{{item.number=='少数'}}">少数</radio>
+                <radio style='margin-left:60rpx;'  value='多数' checked="{{item.number=='多数'}}">多数</radio>
+              </radio-group>
+            </view>
+          </view>
+
+          <view class="weui-cells__title">程度</view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell " hover-class="weui-cell_active">
+              <radio-group style='display:inline-block;'  data-idx='{{index}}' bindchange="bindDegreeChange">
+                <radio style='margin-left:60rpx;'  value='轻微' checked="{{item.degree=='轻微'}}">轻微</radio>
+                <radio style='margin-left:60rpx;'  value='中等' checked="{{item.degree=='中等'}}">中等</radio>
+                <radio style='margin-left:60rpx;' value='严重' checked="{{item.degree=='严重'}}">严重</radio>
+              </radio-group>
+            </view>
+          </view>
+
+          <view class="weui-cells__title">
+            描述
+          </view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_vcode">
+              <view class="weui-cell__bd">
+                <textarea class="weui-textarea" value='{{item.describe}}' data-idx='{{index}}' placeholder="备注" bindinput='bindDescribe' maxlength='200' style="height: 3.3em" />
+                <view class="weui-textarea-counter">{{item.describe.length}}/200</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+
+    </view>
+   <view class='box' wx:if="{{detailPartInfo.damaged}}">
+      <view  class='add' bindtap='addDamage'>
+        <image src='/images/add.png' style='width:44px;height:44px;margin-top:15px;' mode='aspectFit'></image>
+      </view>
+      <view class='save' >
+        <view class="weui-btn-area">
+          <button class="weui-btn" type="primary" bindtap="saveAll">保存所有</button>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{!detailPartInfo.damaged}}" >
+        <view class="weui-btn-area">
+          <button class="weui-btn" type="primary" bindtap="saveAll">保存所有</button>
+        </view>
+      </view>
+  </view>
+</view>

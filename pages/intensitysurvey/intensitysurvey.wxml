@@ -1,0 +1,30 @@
+<!--pages/home/home.wxml-->
+<import src="surveytemplate.wxml" />
+<view class='page'>
+  <view class="page__hd">
+    <view class="page__title">烈度调查——房屋震害</view>
+    <view class="page__desc">调查点基本信息，点击下面的加号添加调查点</view>
+  </view>
+
+
+
+  <view class="page__bd">
+    <block wx:for="{{surveyLists}}" wx:key="{{index}}">
+      <template is="surveytemplate" data="{{...item}}" />
+    </block>
+
+
+
+    <view class='box'>
+      <view class='add' bindtap='addsurvey'>
+        <image src='/images/add.png' style='width:44px;height:44px;margin-top:15px;' mode='aspectFit'></image>
+      </view>
+      <view class='save' >
+        <view class="weui-btn-area">
+          <button class="weui-btn" type="primary" bindtap="saveAll">保存所有</button>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>

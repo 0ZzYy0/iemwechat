@@ -1,0 +1,129 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__hd">
+    <view class="page__title">环境信息/预期地震</view>
+    <view class="page__desc">环境信息/预期地震</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
+
+    <view class="weui-cells__title">
+      <span style="font-size:21px;color:black;">环境信息</span>
+    </view>
+    <view class="weui-cells weui-cells_after-title"></view>
+    <view class="weui-cells__title">1、场地影响（可多选）</view>
+    <view class="weui-cells weui-cells_after-title">
+      <checkbox-group bindchange="checkboxChangDiChange">
+        <label class="weui-cell weui-check__label" wx:for="{{expectEnvir.locationInfluence}}" wx:key="name">
+          <checkbox class="weui-check" value="{{item.name}}" checked="{{item.checked}}" />
+          <view class="weui-cell__hd weui-check__hd_in-checkbox">
+            <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+            <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+          </view>
+          <view class="weui-cell__bd">{{item.name}}</view>
+        </label>
+      </checkbox-group>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label"> 其他</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input bindinput='inputliOther' value='{{liOther}}' class="weui-input" placeholder="其他" />
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__title">2、地基状况（可多选）</view>
+    <view class="weui-cells weui-cells_after-title">
+      <checkbox-group bindchange="checkboxDijiChange">
+        <label class="weui-cell weui-check__label" wx:for="{{expectEnvir.foundationCondition}}" wx:key="name">
+          <checkbox class="weui-check" value="{{item.name}}" checked="{{item.checked}}" />
+
+          <view class="weui-cell__hd weui-check__hd_in-checkbox">
+            <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+            <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+          </view>
+          <view class="weui-cell__bd">{{item.name}}</view>
+        </label>
+      </checkbox-group>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label"> 其他</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input bindinput='inputfcOther' value='{{fcOther}}' class="weui-input" placeholder="其他" />
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__title">3、毗邻建筑</view>
+    <view class="weui-cells weui-cells_after-title">
+      <radio-group bindchange="bindRadioChange">
+        <block wx:for="{{expectEnvir.adjoiningBuilding}}" wx:key="name">
+          <view class="weui-cell">
+            <view class='weui-cell__bd'>
+              <radio value='{{index}}' checked='{{item.checked}}'>{{item.name}}</radio>
+            </view>
+          </view>
+        </block>
+      </radio-group>
+    </view>
+
+    <view class="weui-cells__title">
+      <span style="font-size:21px;color:black;">预期地震</span>
+    </view>
+    <view class="weui-cells weui-cells_after-title"></view>
+    <view class="weui-cells__title">1、既发生地震烈度</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__bd weui-cell__bd_in-select-before">
+          <picker bindchange="bindJiFaLieDuChange" value="{{jifalieduIndex}}" range="{{jifalieduArr}}">
+            <view class="weui-select">{{jifalieduArr[jifalieduIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">2、预期地震作用</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after" style='width:150rpx;'>
+          <view class="weui-label">小震作用</view>
+        </view>
+        <radio-group bindchange="bindSmallChange">
+          <view class="weui-cell__bd">
+            <view class="weui-grids">
+              <block wx:for="{{xiaozhenArr}}" wx:key="value">
+                <view class="weui-grid" hover-class="weui-grid_active">
+                  <view class="weui-grid__label">
+                    <radio disabled='{{item.disabled}}' checked='{{item.checked}}' value='{{index}}'>{{item.value}}</radio>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </radio-group>
+      </view>
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after" style='width:150rpx;'>
+          <view class="weui-label">大震作用</view>
+        </view>
+        <radio-group bindchange="bindBigChange">
+          <view class="weui-cell__bd">
+            <view class="weui-grids">
+              <block wx:for="{{dazhenArr}}" wx:key="value">
+                <view class="weui-grid" hover-class="weui-grid_active">
+                  <view class="weui-grid__label">
+                    <radio disabled='{{item.disabled}}' checked='{{item.checked}}' value='{{index}}'>{{item.value}}</radio>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </radio-group>
+      </view>
+    </view>
+
+
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="save">保存环境信息/预期地震</button>
+    </view>
+  </view>
+</view>

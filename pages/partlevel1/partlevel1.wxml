@@ -1,0 +1,118 @@
+<!--pages/partlevel1/partlevel1.wxml-->
+
+<view class='page'>
+  <view class="page__hd">
+    <view class="page__title">细部震损</view>
+    <view class="page__desc">{{parts[0].fatherName}}</view>
+  </view>
+ 
+  <view class="page__bd">
+   <view class="weui-cell">
+      <radio-group style='display:inline-block;' bindchange="bindRadioChange">
+        <radio style='margin-left:60rpx;' value='intuited' checked='{{detailSeismic.intuited}}'>直观判断</radio>
+        <radio style='margin-left:60rpx;' value='notIntuited' checked='{{!detailSeismic.intuited}}'>非直观判断</radio>
+      </radio-group>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view wx:if="{{detailSeismic.intuited}}">
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+          <view class="weui-cell__hd weui-cell__hd_in-select-after"></view>
+          <view class="weui-cell__bd">
+            <picker bindchange="bindJudgementChange" value="{{judgementIndex}}" range="{{judgement}}">
+              <view class="weui-select weui-select_in-select-after">{{judgement[judgementIndex]}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{!detailSeismic.intuited}}">
+        <block wx:for="{{parts}}" wx:key="id">
+          <navigator url='/pages/partlevel2/partlevel2?fid={{item.id}}&assessId={{assessId}}' class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">{{item.partType}}{{item.typeName}}</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access">点击进入</view>
+          </navigator>
+        </block>
+      </view>
+    </view>
+    <view class="weui-cells__title">图片音频视频功能</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__title">图片上传</view>
+              <view class="weui-uploader__info">{{images.length}}/9</view>
+            </view>
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderImages">
+                <block wx:for="{{images}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                  <view class="weui-uploader__file" data-target='images' data-index='{{idx}}' data-typ='images' catchlongpress='delData' id="{{itemName}}">
+                    <image class="weui-uploader__img" src="{{itemName}}" mode="aspectFill" />
+                  </view>
+                </block>
+              </view>
+              <view class="weui-uploader__input-box" wx:if="{{images.length<9}}">
+                <view class="weui-uploader__input" data-singleIndex='{{index}}' bindtap="chooseImage"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__title">视频上传</view>
+              <view class="weui-uploader__info">{{videos.length}}/3</view>
+            </view>
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderVideos">
+                <block wx:for="{{videos}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                  <view class="weui-uploader__file" data-target='videos' data-index='{{idx}}' data-typ='videos' catchlongpress='delData' id="{{itemName}}">
+                    <video class="weui-uploader__img" src="{{itemName}}" />
+                  </view>
+                </block>
+              </view>
+              <view class="weui-uploader__input-box" wx:if="{{videos.length<3}}">
+                <view class="weui-uploader__input" data-singleIndex='{{index}}' bindtap="chooseVideo"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__title">录音上传</view>
+              <view class="weui-uploader__info">{{audios.length}}/5</view>
+            </view>
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderAudios">
+                <block wx:for="{{audios}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                  <view class="weui-uploader__file" id="{{itemName}}" data-target='audios' data-index='{{idx}}' data-typ='audios' catchlongpress='delData'>
+                    <audio src="{{itemName}}" name='录音' controls/>
+                  </view>
+                </block>
+              </view>
+              <view wx:if="{{audios.length<5}}">
+                <view class="button-sp-area">
+                  <button class="weui-btn btnprimary" bindtap="chooseAudio" wx:if="{{!isRecoding}}">点击开始录音</button>
+                  <button class="weui-btn" type="warn" bindtap="stopAudio" wx:if="{{isRecoding}}" plain="true">点击停止录音</button>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary"  bindtap="saveAll">保存</button>
+    </view>
+  </view>
+</view>

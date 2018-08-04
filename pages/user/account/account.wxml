@@ -1,0 +1,10 @@
+<!--pages/user/account/account.wxml-->
+
+<view class='page'>
+ <view class="page__bd">
+<view>登录网址："http://47.105.56.124/login"</view>
+
+<view>账号：{{userAccount}}</view>
+<view>密码：{{password}}</view>
+</view>
+</view>

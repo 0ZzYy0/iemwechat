@@ -1,0 +1,349 @@
+<template name="sfassmaintpl">
+
+  <view class="singlesurvey__bd">
+
+
+
+    <view class='partsection'>
+      <view class="weui-cells__title">
+        <view class="weui-badge">1、</view>建筑物基本信息</view>
+      <view>
+<view class="weui-cells weui-cells_after-title"></view>
+        <view class="weui-cells__title">
+          建筑物名称
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_vcode">
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" value='{{name}}' data-singleIndex='{{index}}' placeholder="请输入单体调查名称" bindinput='bindName' maxlength='200' style="height: 2.3em" />
+              <view class="weui-textarea-counter">{{name.length}}/200</view>
+            </view>
+            <view class="weui-cell__ft" wx:if="{{name===''}}">
+              <icon type="warn" size="23" color="#E64340"></icon>
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">建筑物位置</view>
+        <view class="weui-cells weui-cells_after-title">
+
+          <view class="weui-cell  weui-cell_vcode">
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" value='{{address}}' placeholder="请输入单体调查位置" bindinput='bindAddress' maxlength='200' data-singleIndex='{{index}}' style="height: 2.3em" />
+              <view class="weui-textarea-counter">{{address.length}}/200</view>
+            </view>
+            <view class="weui-cell__ft" wx:if="{{address===''}}">
+              <icon type="warn" size="23" color="#E64340"></icon>
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells__title">选择结构类型</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after"></view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindStructTypeChange" data-singleIndex='{{index}}' value="{{structTypeIndex}}" range="{{structTypes}}">
+                <view class="weui-select weui-select_in-select-after">{{structTypes[structTypeIndex]}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>
+
+
+        <view class="weui-cells weui-cells_after-title">
+
+          <view class="weui-cell weui-cell_input weui-cell_vcode">
+            <view class="weui-cell__hd">
+              <view class="weui-label">房主</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" value='{{houseHost}}' bindinput='bindHost' data-singleIndex='{{index}}' placeholder="请输入房主" />
+            </view>
+            <view class="weui-cell__ft" wx:if="{{houseHost===''}}">
+              <icon type="warn" size="23" color="#E64340"></icon>
+            </view>
+          </view>
+
+
+          <view class="weui-cell weui-cell_input weui-cell_vcode">
+            <view class="weui-cell__hd">
+              <view class="weui-label">建筑物经度</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" value='{{lng}}' bindinput='bindLng' data-singleIndex='{{index}}' placeholder="请输入建筑物经度" />
+            </view>
+            <view class="weui-cell__ft" wx:if="{{lng===''}}">
+              <icon type="warn" size="23" color="#E64340"></icon>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input weui-cell_vcode">
+            <view class="weui-cell__hd">
+              <view class="weui-label">建筑物纬度</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" value='{{lat}}' bindinput='bindLat' data-singleIndex='{{index}}' placeholder="请输入建筑物纬度" />
+            </view>
+            <view class="weui-cell__ft" wx:if="{{lat===''}}">
+              <icon type="warn" size="23" color="#E64340"></icon>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input weui-cell_vcode">
+            <view class="weui-cell__hd">
+              <view class="weui-label">调查时间</view>
+            </view>
+            <view class="weui-cell__bd modify_bd">
+              <input class="weui-input" value='{{dateTime}}' bindinput='bindDateTime' data-singleIndex='{{index}}' placeholder="请输入调查时间" />
+            </view>
+            <view class="weui-cell__ft" wx:if="{{dateTime===''}}">
+              <icon type="warn" size="23" color="#E64340"></icon>
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">建筑物层数信息</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input weui-cell_vcode">
+            <view class="weui-cell__hd">
+              <view class="weui-label layersNumber">主体层数—地上</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input ftinput" value='{{mainOnGround}}' bindinput='bindMainOnGround' data-singleIndex='{{index}}' placeholder="请输入层数" />
+            </view>
+            <view class="weui-cell__ft">
+              <icon type="warn" size="23" wx:if="{{mainOnGround===''}}" color="#E64340"></icon> 层
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input weui-cell_vcode">
+            <view class="weui-cell__hd">
+              <view class="weui-label layersNumber">主体层数—地下</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" value='{{mainUnderGround}}' bindinput='bindMainUnderGround' data-singleIndex='{{index}}' placeholder="请输入层数" />
+            </view>
+            <view class="weui-cell__ft">
+              <icon type="warn" size="23" wx:if="{{mainUnderGround===''}}" color="#E64340"></icon> 层
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input weui-cell_vcode">
+            <view class="weui-cell__hd">
+              <view class="weui-label layersNumber">局部层数</view>
+            </view>
+            <view class="weui-cell__bd modify_bd">
+              <input class="weui-input" value='{{localNumOfLayers}}' bindinput='bindLocalNumOfLayers' data-singleIndex='{{index}}' placeholder="请输入层数" />
+            </view>
+            <view class="weui-cell__ft">
+              <icon type="warn" size="23" wx:if="{{localNumOfLayers===''}}" color="#E64340"></icon> 层
+            </view>
+          </view>
+        </view>
+
+
+
+        <view class="weui-cells__title">选择建筑物用途</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after"></view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindUsageChange" data-singleIndex='{{index}}' value="{{usageIndex}}" range="{{usages}}">
+                <view class="weui-select weui-select_in-select-after">{{usages[usageIndex]}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">参数地区选择
+          <span style="color:red;padding-left:180rpx;">
+            <icon type="warn" size="23" color="#E64340"></icon>*现仅西南地区可用</span>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after"></view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindRegionParamChange" data-singleIndex='{{index}}' value="{{regionParamIndex}}" range="{{regionParams}}">
+                <view class="weui-select weui-select_in-select-after">{{regionParams[regionParamIndex]}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cells__title" style='display:inline-block;'>建筑物面积
+          <radio-group style='display:inline-block;' bindchange="bindRadioChange" data-singleIndex='{{index}}'>
+            <radio style='margin-left:60rpx;' value='notAccurate' checked='{{areaType==="notAccurate"}}'>估计</radio>
+            <radio style='margin-left:60rpx;' value='accurate' checked='{{areaType==="accurate"}}'>精确</radio>
+          </radio-group>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input weui-cell_vcode">
+            <view class="weui-cell__hd">
+              <view class="weui-label">建筑物面积</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" bindinput='bindArea' data-singleIndex='{{index}}' placeholder="请输入建筑物面积" />
+            </view>
+            <view class="weui-cell__ft">m²
+              <icon type="warn" wx:if="{{area===''}}" size="23" color="#E64340"></icon>
+            </view>
+          </view>
+        </view>
+
+
+        <view class="weui-cells__title" style='display:inline-block;'>抗震设防</view>
+        <view class="weui-cells__title" style='display:inline-block;'>
+          <radio-group style='display:inline-block;' bindchange="bindKZSFChange" data-singleIndex='{{index}}'>
+            <radio value='false' checked='{{!fortified}}'>未经抗震设防</radio>
+            <radio style='padding-left:15px;' value='true' checked='{{fortified}}'>抗震设防烈度</radio>
+          </radio-group>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after"></view>
+            <view class="weui-cell__bd">
+              <picker disabled='{{!fortified}}' bindchange="bindKangZhenChange" data-singleIndex='{{index}}' value="{{kangZhenIndex}}" range="{{kangZhens}}">
+                <view class="weui-select weui-select_in-select-after">{{kangZhens[kangZhenIndex]}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells__title">备注</view>
+        <view class="weui-cells weui-cells_after-title">
+
+          <view class="weui-cell  weui-cell_vcode">
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" value='{{mark}}' placeholder="请输入备注" bindinput='bindMark' data-singleIndex='{{index}}' maxlength='500' style="height: 3.3em" />
+              <view class="weui-textarea-counter">{{mark.length}}/500</view>
+            </view>
+            <view class="weui-cell__ft" wx:if="{{mark===''}}">
+              <icon type="warn" size="23" color="#E64340"></icon>
+            </view>
+          </view>
+        </view>
+
+        <view>
+          <radio-group bindchange="fileTypeChange" data-singleIndex='{{index}}'>
+            <view class="flex_box">
+              <view class="flex_item">
+                <label class="{{fileType==='image'?'active':''}}">
+                  <radio value='image' checked='{{fileType==="image"}}'>照片</radio>
+                </label>
+              </view>
+              <view class="flex_item">
+                <label class="{{fileType==='video'?'active':''}}">
+                  <radio value='video' checked='{{fileType==="video"}}'>视频</radio>
+                </label>
+              </view>
+              <view class="flex_item">
+                <label class="{{fileType==='audio'?'active':''}}">
+                  <radio value='audio' checked='{{fileType==="audio"}}'>录音</radio>
+                </label>
+              </view>
+            </view>
+          </radio-group>
+          <view class="weui-cells" wx:if="{{fileType==='image'}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <view class="weui-uploader">
+                  <view class="weui-uploader__hd">
+                    <view class="weui-uploader__title">图片上传</view>
+                    <view class="weui-uploader__info">{{images.length}}/9</view>
+                  </view>
+                  <view class="weui-uploader__bd">
+                    <view class="weui-uploader__files" id="uploaderImages">
+                      <block wx:for="{{images}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                        <view class="weui-uploader__file" data-target='images' data-index='{{idx}}' data-singleIndex='{{index}}' catchlongpress='delData' id="{{itemName}}">
+                          <image class="weui-uploader__img" src="{{itemName}}" mode="aspectFill" />
+                        </view>
+                      </block>
+                    </view>
+                    <view class="weui-uploader__input-box" wx:if="{{images.length<9}}">
+                      <view class="weui-uploader__input" data-singleIndex='{{index}}' bindtap="chooseImage"></view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="weui-cells" wx:if="{{fileType==='video'}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <view class="weui-uploader">
+                  <view class="weui-uploader__hd">
+                    <view class="weui-uploader__title">视频上传</view>
+                    <view class="weui-uploader__info">{{videos.length}}/3</view>
+                  </view>
+                  <view class="weui-uploader__bd">
+                    <view class="weui-uploader__files" id="uploaderVideos">
+                      <block wx:for="{{videos}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                        <view class="weui-uploader__file" catchlongpress='delData' data-target='videos' data-index='{{idx}}' data-singleIndex='{{index}}' id="{{itemName}}">
+                          <video class="weui-uploader__img" src="{{itemName}}" />
+                        </view>
+                      </block>
+                    </view>
+                    <view class="weui-uploader__input-box" wx:if="{{videos.length<3}}">
+                      <view class="weui-uploader__input" data-singleIndex='{{index}}' bindtap="chooseVideo"></view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="weui-cells" wx:if="{{fileType==='audio'}}">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <view class="weui-uploader">
+                  <view class="weui-uploader__hd">
+                    <view class="weui-uploader__title">录音上传</view>
+                    <view class="weui-uploader__info">{{audios.length}}/5</view>
+                  </view>
+                  <view class="weui-uploader__bd">
+                    <view class="weui-uploader__files" id="uploaderAudios">
+                      <block wx:for="{{audios}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                        <view class="weui-uploader__file" id="{{itemName}}" data-target='audios' data-index='{{idx}}' data-singleIndex='{{index}}' catchlongpress='delData'>
+                          <audio src="{{itemName}}" name='录音{{idx+1}}' controls/>
+                        </view>
+                      </block>
+                    </view>
+                    <view wx:if="{{audios.length<5}}">
+                      <view class="button-sp-area">
+                        <button class="weui-btn btnprimary" bindtap="chooseAudio" data-index='{{idx}}' data-singleIndex='{{index}}' wx:if="{{!isRecoding}}">点击开始录音</button>
+                        <button class="weui-btn" type="warn" bindtap="stopAudio" data-index='{{idx}}' data-singleIndex='{{index}}' wx:if="{{isRecoding}}" plain="true">点击停止录音</button>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+     <view class='partsection'>
+      <view class="weui-cells__title">
+        <view class="weui-badge">2、</view>预期地震/环境信息</view><view class="weui-cells weui-cells_after-title"></view>
+      <view class="weui-cells weui-cells_after-title">
+        <view data-mid='{{id}}' bindtap='navigateToExpectEnvir' class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__bd">预期地震/环境信息</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">点击进入</view>
+        </view>
+      </view>
+    </view> 
+
+     <view class='partsection'>
+      <view class="weui-cells__title">
+        <view class="weui-badge">3、</view>细部震损信息</view><view class="weui-cells weui-cells_after-title"></view>
+      <view class="weui-cells weui-cells_after-title">
+        <view data-mid='{{id}}' bindtap='navigateToDetailSeismic' class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__bd">细部震损信息</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">点击进入</view>
+        </view>
+      </view>
+    </view> 
+
+  </view>
+</template>

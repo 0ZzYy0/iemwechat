@@ -1,0 +1,85 @@
+<!--pages/home/home.wxml-->
+<view class='page'>
+  <view class="page__hd">
+    <view class="page__title">尊敬的：{{name}}</view>
+    <view class="page__desc">欢迎使用地震现场灾害信息调查系统</view>
+  </view>
+  <view class="page__bd">
+    <view class='radiogp'>
+      <form bindsubmit='savegroup'>
+        <view class="weui-cell weui-cell_input weui-cell_vcode">
+          <view class="weui-cell__hd">
+            <view class="weui-label">小组编号</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" name="groupNumbering" type='text' disabled="{{!editable}}" placeholder="输入小组编号" value='{{group.groupNumbering}}' />
+          </view>
+          <view class="weui-cell__ft" wx:if="{{!editable}}" catchtap='editablechange'>
+            <button>
+              <image class="weui-vcode-img" src="/images/Edit.png" style="width: 23px;height:23px;"></image>编辑</button>
+          </view>
+          <view class="weui-cell__ft" wx:if="{{editable}}" catchtap='editablechange'>
+            <button>
+              <image class="weui-vcode-img" src="/images/cancel.png" style="width: 23px;height:23px;"></image>取消</button>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input weui-cell_vcode">
+          <view class="weui-cell__hd">
+            <view class="weui-label">是否组长</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" name="isLeader" id='' disabled="{{!editable}}" placeholder="是/否" value='{{group.isLeader}}' />
+          </view>
+          <view class="weui-cell__ft" wx:if="{{editable}}">
+            <button formType="submit">
+              <image class="weui-vcode-img" src="/images/save.png" style="width: 23px;height:23px;"></image>保存</button>
+          </view>
+          <view class="weui-cell__ft" wx:if="{{!editable}}">
+            <button style="opacity:0;">
+              <image class="weui-vcode-img" src="/images/save.png" style="width: 23px;height:23px;opacity:0;"></image>测试</button>
+          </view>
+        </view>
+      </form>
+      <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">地震选择</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindEQChange" value="{{itemsIndex}}" range="{{earthquakes}}">
+            <view class="weui-select weui-select_in-select-after">{{earthquakes[itemsIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class='weui-cell'>
+      <view class='box_main'>
+        <view class='block1' bindtap='bindxinxigongxiang'>
+          <image src='/images/zaiqingshangbao.png' mode='aspectFit'></image>
+        </view>
+        <view class='block2' bindtap='bindliedudiaocha'>
+          <image src='/images/liedudiaocha.png' mode='aspectFit'></image>
+        </view>
+        <view class='block3'  bindtap='bindxinxigongxiang'>
+          信息共享
+        </view>
+        <view class='block4' bindtap='bindliedudiaocha'>
+          烈度调查
+        </view>
+        <view class='block5' bindtap='bindanquanjianding'>
+          <image src='/images/anquanjianding.png' mode='aspectFit'></image>
+        </view>
+        <view class='block6'>
+          <image src='/images/yinpingongneng.png' mode='aspectFit'></image>
+        </view>
+        <view class='block7'>
+          安全鉴定
+        </view>
+        <view class='block8'>
+          音频功能
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

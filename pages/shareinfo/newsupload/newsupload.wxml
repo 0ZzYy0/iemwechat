@@ -1,0 +1,155 @@
+<!--pages/shareinfo/newsupload/newsupload.wxml-->
+
+<view>
+  <view class="weui-cells__title">
+    信息发布
+  </view>
+  <view class="weui-cells weui-cells_after-title">
+
+    <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">信息类型</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker bindchange="bindtypeChange" value="{{typeIndex}}" range="{{newTypes}}">
+          <view class="weui-select weui-select_in-select-after">{{newTypes[typeIndex]}}</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">相关位置信息</view>
+  <view class="weui-cells weui-cells_after-title">
+
+    <view class="weui-cell  weui-cell_vcode">
+      <view class="weui-cell__bd">
+        <textarea class="weui-textarea" value='{{news.address}}' placeholder="相关地点" bindinput='bindaddress' maxlength='100' style="height: 2.3em" />
+        <view class="weui-textarea-counter">{{news.address.length}}/100</view>
+      </view>
+      <view class="weui-cell__ft" wx:if="{{!news.address}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">经度</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" value='{{news.lng}}' bindinput='bindLng'  placeholder="请输入经度" />
+      </view>
+      <view class="weui-cell__ft" wx:if="{{!news.lng}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">纬度</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" value='{{news.lat}}' bindinput='bindLat' placeholder="请输入纬度" />
+      </view>
+      <view class="weui-cell__ft" wx:if="{{!news.lat}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">时间</view>
+      </view>
+      <view class="weui-cell__bd modify_bd">
+        <input class="weui-input" value='{{news.dateTime}}' bindinput='binddateTime'  placeholder="请输入时间" />
+      </view>
+      <view class="weui-cell__ft" wx:if="{{!news.dateTime}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+
+  </view>
+
+
+  <view class="weui-cells__title">作者信息</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">姓名</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" value='{{news.authorName}}' bindinput='bindauthorname'  placeholder="请输入姓名" />
+      </view>
+      <view class="weui-cell__ft" wx:if="{{!news.authorName}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">工作单位</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" value='{{news.authorDepartment}}' bindinput='bindauthordepartment' data-surveyIndex='{{index}}' placeholder="请输入工作单位" />
+      </view>
+      <view class="weui-cell__ft" wx:if="{{!news.authorDepartment}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">小组编号</view>
+      </view>
+      <view class="weui-cell__bd modify_bd">
+        <input class="weui-input" value='{{news.authorGroup}}' bindinput='bindauthorGroup' data-surveyIndex='{{index}}' placeholder="请输入小组编号" />
+      </view>
+      <view class="weui-cell__ft" wx:if="{{!news.authorGroup}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+
+  </view>
+
+
+  <view class="weui-cells__title">标题</view>
+  <view class="weui-cells weui-cells_after-title">
+
+    <view class="weui-cell  weui-cell_vcode">
+      <view class="weui-cell__bd">
+        <textarea class="weui-textarea" value='{{news.newsTitle}}' placeholder="请输入标题" bindinput='bindnewsTitle' maxlength='30' style="height: 2.3em" />
+        <view class="weui-textarea-counter">{{news.newsTitle.length}}/30</view>
+      </view>
+      <view class="weui-cell__ft" wx:if="{{!news.newsTitle}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">内容</view>
+  <view class="weui-cells weui-cells_after-title">
+
+    <view class="weui-cell  weui-cell_vcode">
+      <view class="weui-cell__bd">
+        <textarea class="weui-textarea" value='{{news.newsContent}}' placeholder="请输入内容" bindinput='bindnewsContent'  maxlength='500' style="height: 300px;" />
+        <view class="weui-textarea-counter">{{news.newsContent.length}}/500</view>
+      </view>
+      <view class="weui-cell__ft" wx:if="{{!news.newsContent}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+  
+  </view>
+  <view class="weui-flex">
+   <view class="weui-flex__item">
+        <button  class="weui-btn" bindtap='clear' type="warn">清空</button>
+      </view>
+      <view class="weui-flex__item">
+        <button  class="weui-btn" bindtap='save'type="primary" plain="true">保存</button>
+      </view>
+      <view class="weui-flex__item">
+        <button  class="weui-btn"  bindtap='upload' type="primary">上传</button>
+      </view>
+    </view>
+</view>

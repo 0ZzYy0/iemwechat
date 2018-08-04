@@ -1,0 +1,14 @@
+/* pages/shareinfo/shareinfo.wxss */
+.page__hd {
+  margin-top: -50rpx;
+}
+.page__bd {
+  align-content: center;
+
+  margin-top: -70rpx;
+}
+
+.infogp{
+  margin-top: 15px;
+  border-top: 1px solid #129fff;
+}

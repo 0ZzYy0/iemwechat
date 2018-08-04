@@ -1,0 +1,18 @@
+/* pages/sfasslist/sfasslist.wxss */
+.page__hd {
+  left: 0;
+  right: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #129fff;
+}
+.title{
+  
+  font-size: 17px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.sfasslisttemplate {
+  margin-top: 15px;
+  border-bottom: 1px solid #129fff;
+}

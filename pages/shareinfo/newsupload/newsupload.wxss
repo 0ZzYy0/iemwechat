@@ -1,0 +1,4 @@
+/* pages/shareinfo/newsupload/newsupload.wxss */
+.weui-flex__item{
+  padding: 15px 15px;
+}

@@ -1,0 +1,20 @@
+<!--pages/sfasslist/sfasslist.wxml-->
+<import src="sfassmaintpl.wxml" />
+<view class='page'>
+  <view class="page__hd">
+    <view class="page__title">安全鉴定</view>
+    <view class="page__desc">建筑物信息</view>
+  </view>
+
+
+  <view class="page__bd">
+    <block wx:for="{{singleSurveyList}}" wx:key="{{index}}">
+      <template is="sfassmaintpl" data="{{...item}}" />
+    </block>
+    <view>
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" bindtap="saveAll">保存建筑物基本信息</button>
+      </view>
+    </view>
+  </view>
+</view>

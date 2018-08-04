@@ -1,0 +1,94 @@
+/* pages/home/home.wxss */
+.page__hd {
+  margin-top: -50rpx;
+}
+.page__bd {
+  align-content: left;
+  text-align: left;
+  margin-top: -70rpx;
+}
+.radiogp{
+ 
+  margin-top: 15px;
+  border-top: 1px solid #129fff;
+}
+
+image{
+  width: 100%;
+  height: 250rpx;
+}
+.box_main {
+  position: relative;
+  width: 100%;
+  height: 720rpx;
+  text-align: center;
+}
+
+.block1 {
+  float: left;
+ 
+  height: 250rpx;
+  width: 44%;
+  margin-top: 2%;
+  margin-left: 4%;
+}
+
+.block2 {
+  float: left;
+  height: 250rpx;
+  margin-top: 2%;
+  width: 44%;
+  margin-left: 4%;
+}
+
+.block3 {
+  float: left;
+ 
+  height: 50rpx;
+  width: 44%;
+  margin-top: 2%;
+  margin-left: 4%;
+}
+
+.block4 {
+  float: left;
+  
+  height: 50rpx;
+  margin-top: 2%;
+  width: 44%;
+  margin-left: 4%;
+}
+
+
+.block5 {
+  float: left;
+  height: 250rpx;
+  width: 44%;
+  margin-top: 8%;
+  margin-left: 4%;
+}
+
+
+.block6 {
+  float: left;
+  height: 250rpx;
+  margin-top: 8%;
+  width: 44%;
+  margin-left: 4%;
+}
+
+.block7 {
+  float: left;
+  height: 50rpx;
+  width: 44%;
+  margin-top: 2%;
+  margin-left: 4%;
+}
+
+.block8 {
+  float: left;
+  height: 50rpx;
+  margin-top: 2%;
+  width: 44%;
+  margin-left: 4%;
+}

@@ -1,0 +1,131 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">存在未填写项</view>
+
+    <view class="weui-cells__title">请填写基本信息</view>
+    <view class="weui-cells weui-cells_after-title">
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">姓名</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{name}}' bindinput='bindName' placeholder="请输入姓名" />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{name===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">专业</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{discipline}}' bindinput='bindDiscipline' placeholder="请输入专业" />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{discipline===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">单位</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{department}}' bindinput='bindDepartment' placeholder="请输入单位" />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{department===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">职称</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{profTitle}}' bindinput='bindProfTitle' placeholder="请输入职称" />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{profTitle===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">邮箱</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input type='email' class="weui-input" value='{{email}}' bindinput='bindEmail' placeholder="请输入邮箱" />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{email===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">手机号码</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{phone}}' bindinput='bindPhone' type='number' placeholder="请输入手机号码" />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{phone===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">联系地址</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_vcode">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" value='{{address}}' placeholder="请输入联系地址" bindinput='bindAddress' maxlength='200' style="height: 3.3em" />
+          <view class="weui-textarea-counter">{{wordCount}}/200</view>
+        </view>
+        <view class="weui-cell__ft" wx:if="{{address===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">邮政编码</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{zipCode}}' bindinput='bindZipCode' placeholder="请输入邮政编码" />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{zipCode===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+
+
+    <view class="weui-cells__tips">
+      <icon type="warn" size="20" color="#E64340"></icon>请务必填写真实信息
+    </view>
+
+    <checkbox-group bindchange="bindAgreeChange">
+      <label class="weui-agree" for="weuiAgree">
+        <view class="weui-agree__text">
+          <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+          <view class="weui-agree__checkbox-icon">
+            <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+          </view>
+          阅读并同意
+          <navigator url="" class="weui-agree__link">《相关条款》</navigator>
+        </view>
+      </label>
+    </checkbox-group>
+
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="updateUserInfo">保存</button>
+    </view>
+  </view>
+</view>

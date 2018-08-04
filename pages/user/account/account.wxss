@@ -1,0 +1,4 @@
+/* pages/user/account/account.wxss */
+view{
+  word-wrap: break-word
+}

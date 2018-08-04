@@ -1,0 +1,15 @@
+<view class="page">
+
+  <view class="nav_hd">
+    <block wx:for="{{tabs}}" wx:key="*this">
+      <view class="nav_item {{activeIndex == index ? 'nav_item_on' : ''}}" id="{{index}}" bindtap="tabClick" >
+        {{item}}
+      </view>
+    </block>
+  </view>
+
+  <view class="mp__bd">
+    <map id="myMap"  longitude="{{earthquake.longitude}}" latitude="{{earthquake.latitude}}" markers="{{markers}}" scale="8" polyline="{{polyline}}" controls="{{controls}}" bindcontroltap="controltap" bindmarkertap="markertap" show-location>
+    </map>
+  </view>
+</view>

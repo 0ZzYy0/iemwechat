@@ -1,0 +1,32 @@
+/* pages/singlesurvey/singlesurvey.wxss */
+
+.page__hd {
+  left: 0;
+  right: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #129fff;
+}
+
+.block_body {
+  border-top: 1px solid #129fff;
+  border-bottom: 1px solid #129fff;
+}
+
+.box {
+  position: relative;
+  width: 100%;
+  height: 300rpx;
+  text-align: center;
+}
+.add {
+  float: left;
+  width: 44%;
+  padding-top: 1%; margin-left: 4%;
+  text-align: center;
+}
+.save{
+  float: left;
+  width: 44%;
+  
+}

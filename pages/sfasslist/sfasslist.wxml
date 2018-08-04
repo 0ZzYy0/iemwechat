@@ -1,0 +1,28 @@
+<!--pages/sfasslist/sfasslist.wxml-->
+<import src="sfasslisttemplate.wxml" />
+<view class='page'>
+  <view class="page__hd">
+    <view class="page__title">安全鉴定</view>
+    <view class="page__desc">建筑物列表</view>
+  </view>
+
+  <view class="page__bd">
+    <block wx:for="{{sfasslist}}" wx:key="{{index}}">
+      <template is="sfasslisttemplate" data="{{...item,index}}" />
+    </block>
+
+
+
+
+
+
+
+    <view class='box'>
+      <view class='save'>
+        <view class="weui-btn-area">
+          <button class="weui-btn" type="primary" bindtap="add">添加</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

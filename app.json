@@ -1,0 +1,56 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/user/user",
+    "pages/userinfo/userinfo",
+    "pages/intensitysurvey/intensitysurvey",
+    "pages/singlesurvey/singlesurvey",
+    "pages/multisurvey/multisurvey",
+    "pages/safetyassess/safetyassess",
+    "pages/sfasslist/sfasslist",
+    "pages/sfassmain/sfassmain",
+    "pages/mapinfo/mapinfo",
+    "pages/user/account/account",
+    "pages/shareinfo/shareinfo",
+    "pages/shareinfo/newsupload/newsupload",
+    "pages/shareinfo/newsdetail/newsdetail",
+    "pages/shareinfo/newslist/newslist",
+    "pages/shareinfo/mynewslist/mynewslist",
+    "pages/shareinfo/commandlist/commandlist",
+    "pages/sfaexpectenvir/sfaexpectenvir",
+    "pages/detailpartinfo/detailpartinfo",
+    "pages/partlevel1/partlevel1",
+    "pages/partlevel2/partlevel2",
+    "pages/partlevel3/partlevel3"
+  ],
+  "tabBar": {
+    "color": "#a8a8a8",
+    "selectedColor": "#129fff",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "images/home_default.png",
+        "selectedIconPath": "images/home_select.png"
+      },
+      {
+        "pagePath": "pages/mapinfo/mapinfo",
+        "text": "地图信息",
+        "iconPath": "images/map_default.png",
+        "selectedIconPath": "images/map_select.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "用户中心",
+        "iconPath": "images/user_default.png",
+        "selectedIconPath": "images/user_select.png"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#129fff",
+    "backgroundColor": "#0097ff",
+    "navigationBarTextStyle": "white"
+  }
+}

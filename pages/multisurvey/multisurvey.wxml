@@ -1,0 +1,21 @@
+<import src="multisurveytemplate.wxml" />
+<view class='page'>
+  <view class="page__hd">
+    <view class="page__title">烈度调查——群体调查</view>
+    <view class="page__desc">调查点： {{survey.name}}——群体调查</view>
+  </view>
+
+  <view class="page__bd">
+    <block wx:for="{{multiSurvey.partSurveyList}}" wx:key="{{index}}">
+      <template is="multisurveytemplate" data="{{...item}}" />
+    </block>
+
+    <view class='box'>
+      <view class='save'>
+        <view class="weui-btn-area">
+          <button class="weui-btn" type="primary" bindtap="saveAll">保存所有</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

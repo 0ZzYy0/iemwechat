@@ -1,0 +1,86 @@
+<template name="multisurveytemplate">
+
+
+  <view class='multisurveytemplate'>
+
+    <view class="weui-cells__title">{{name}}</view>
+    <view class="weui-cells weui-cells_after-title">
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd"><view class="weui-label">基本完好</view></view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{basic}}' bindinput='bindBasic' data-multiIndex='{{index}}' placeholder="输入面积/栋数" />
+        </view>
+        <view class="weui-cell__ft">
+          <icon type="warn" size="23" wx:if="{{!basic }}" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd"><view class="weui-label">轻微破坏</view></view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{little}}' bindinput='bindLittle' data-multiIndex='{{index}}' placeholder="输入面积/栋数" />
+        </view>
+        <view class="weui-cell__ft">
+          <icon type="warn" size="23" wx:if="{{!little }}" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd"><view class="weui-label">中等破坏</view></view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{middle}}' bindinput='bindMiddle' data-multiIndex='{{index}}' placeholder="输入面积/栋数" />
+        </view>
+        <view class="weui-cell__ft">
+          <icon type="warn" size="23" wx:if="{{!middle }}" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd"><view class="weui-label">严重破坏</view></view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{severe}}' bindinput='bindSevere' data-multiIndex='{{index}}' placeholder="输入面积/栋数" />
+        </view>
+        <view class="weui-cell__ft">
+          <icon type="warn" size="23" wx:if="{{!severe }}" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd"><view class="weui-label">毁坏</view></view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{damage}}' bindinput='bindDamage' data-multiIndex='{{index}}' placeholder="输入面积/栋数" />
+        </view>
+        <view class="weui-cell__ft" >
+          <icon type="warn" size="23" wx:if="{{!damage}}" color="#E64340"></icon>
+        </view>
+      </view>
+
+
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd"><view class="weui-label">总面积/栋数</view></view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{area}}' bindinput='bindArea' disabled data-multiIndex='{{index}}' placeholder="自动计算" />
+        </view>
+        <view class="weui-cell__ft">
+          <icon type="warn" size="23"  wx:if="{{!area}}" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd"><view class="weui-label">震害指数</view></view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{factor}}' disabled bindinput='bindFactor' data-multiIndex='{{index}}' placeholder="自动计算" />
+        </view>
+        <view class="weui-cell__ft" >
+          <icon type="warn" size="23" wx:if="{{!factor}}" color="#E64340"></icon>
+        </view>
+      </view>
+
+    
+    </view>
+
+  </view>
+
+</template>
