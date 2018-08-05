@@ -70,14 +70,14 @@
         <view class='block5' bindtap='bindanquanjianding'>
           <image src='/images/anquanjianding.png' mode='aspectFit'></image>
         </view>
-        <view class='block6'>
+        <view class='block6' bindtap='binddizhizaihaidiaocha'>
           <image src='/images/yinpingongneng.png' mode='aspectFit'></image>
         </view>
         <view class='block7'>
           安全鉴定
         </view>
-        <view class='block8'>
-          音频功能
+        <view class='block8' bindtap='binddizhizaihaidiaocha'>
+          地质灾害调查
         </view>
       </view>
     </view>

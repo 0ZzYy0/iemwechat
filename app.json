@@ -21,7 +21,8 @@
     "pages/detailpartinfo/detailpartinfo",
     "pages/partlevel1/partlevel1",
     "pages/partlevel2/partlevel2",
-    "pages/partlevel3/partlevel3"
+    "pages/partlevel3/partlevel3",
+    "pages/disasterSurvey/disasterSurvey"
   ],
   "tabBar": {
     "color": "#a8a8a8",

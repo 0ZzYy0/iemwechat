@@ -1,0 +1,73 @@
+/* pages/intensitysurvey/intensitysurvey.wxss */
+
+.page__hd {
+  left: 0;
+  right: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #129fff;
+}
+.disasterTemplate{
+  margin-top: 15px;
+  border-bottom: 1px solid #129fff;
+}
+
+
+
+.weui-badge {
+  display: inline-block;
+  padding: 0.15em 0.4em;
+  min-width: 8px;
+  border-radius: 18px;
+  background-color: #129fff;
+  color: #fff;
+  /* line-height: 1.2; */
+  text-align: center;
+  /* font-size: 12px; */
+  vertical-align: middle;
+}
+
+.weui-badge_dot {
+  padding: 0.4em;
+  min-width: 0;
+}
+.box {
+  position: relative;
+  width: 100%;
+  height: 300rpx;
+  text-align: center;
+}
+.add {
+  float: left;
+  width: 44%;
+  padding-top: 1%; margin-left: 4%;
+  text-align: center;
+}
+.save{
+  float: left;
+  width: 44%;
+  
+}
+
+
+.flex_box {
+  display: flex;
+  width: 100%;
+  background: #eee;
+}
+
+.flex_item {
+  flex: 1;
+  text-align: center;
+}
+
+.flex_item label {
+  padding: 15rpx 0;
+  display: inline-block;
+  width: 80%;
+}
+
+.flex_item label.active {
+  color: #129fff;
+  border-bottom: 3px solid #129fff;
+}

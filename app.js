@@ -1,6 +1,7 @@
 //app.js
-//var server = "http://47.105.56.124";
+// var server = "http://47.105.56.124";
 var server = "http://localhost"
+
 App({
   onLaunch: function () {
     var that=this;
@@ -52,7 +53,7 @@ App({
     JSESSIONID:null,
     sessiontime:null,
     infoTypeList: ["食宿", "交通", "伤亡", "指挥部信息", "其他"],
-    //server:"http://47.105.56.124"
-     server:"http://localhost"
+    // server:"http://47.105.56.124"
+    server:"http://localhost"
   }
 })

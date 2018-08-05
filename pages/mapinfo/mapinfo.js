@@ -51,7 +51,7 @@ Page({
       callout.display = "ALWAYS";
       callout.textAlign = "center";
       earthquake.callout = callout;
-      //console.log(earthquake);
+      console.log(earthquake);
       markers.push(earthquake);
       this.setData({
         earthquake:earthquake,
@@ -62,7 +62,7 @@ Page({
     }
   },
   getSurveyIntensityByEQ: function (earthquake, index){
-    //console.log(earthquake);
+    console.log(earthquake);
     let that = this;
     wx.request({
       method: "GET",
@@ -94,9 +94,6 @@ Page({
     });
   
     if (index == 0) {
-      console.log("进入调查烈度点");
-      console.log(that.data.earthquake);
-      console.log(index);
       that.getSurveyIntensityByEQ(that.data.earthquake, index);
     }
     if (index == 1) {
@@ -171,7 +168,7 @@ Page({
       callout.display = "ALWAYS";
       callout.textAlign = "center";
       mk.callout = callout;
-      console.log("mk------"+mk);
+      console.log(mk);
       markers.push(mk)
     })
     this.setData({

@@ -1,0 +1,722 @@
+<template name="disasterTemplate">
+  <view class='disasterTemplate'>
+
+    <view class="weui-cells__title">
+      <view class="weui-badge">{{index+1}}、</view>调查名称
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+
+      <view class="weui-cell weui-cell_vcode">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" value='{{name}}' placeholder="请输入调查名称" bindinput='bindinputName' data-disasterindex='{{index}}' maxlength='200' style="height: 3.7em" />
+          <view class="weui-textarea-counter">{{name.length}}/200</view>
+        </view>
+        <view class="weui-cell__ft" wx:if="{{name===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">
+      地址
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+
+      <view class="weui-cell weui-cell_vcode">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" value='{{adderss}}' placeholder="请输入地址" bindinput='bindinputAdderss' data-disasterindex='{{index}}' maxlength='200' style="height: 3.7em" />
+          <view class="weui-textarea-counter">{{adderss.length}}/200</view>
+        </view>
+        <view class="weui-cell__ft" wx:if="{{adderss===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">调查点经度</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{lng}}' data-disasterindex='{{index}}' placeholder="请输入调查点经度" bindinput='bindinputLng' />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{lng===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">调查点纬度</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{lat}}' data-disasterindex='{{index}}' placeholder="请输入调查点纬度" bindinput='bindinputLat' />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{lat===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">震级</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindIntensityChange" data-disasterindex='{{index}}' value="{{intensityIndex}}" range="{{intensityRange}}">
+            <view class="weui-select weui-select_in-select-after">{{intensityRange[intensityIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">调查时间</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{time}}' data-disasterindex='{{index}}' placeholder="请输入调查时间" bindinput='bindinputTime' />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{time===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">地质灾害类型</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindTypeChange" data-disasterindex='{{index}}' value="{{typeIndex}}" range="{{typeRange}}">
+            <view class="weui-select weui-select_in-select-after">{{typeRange[typeIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">地质灾害形态</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindShapeChange" data-disasterindex='{{index}}' value="{{shapeIndex}}" range="{{shapeRange}}">
+            <view class="weui-select weui-select_in-select-after">{{shapeRange[shapeIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">地质灾害大小</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{size}}' data-disasterindex='{{index}}' placeholder="请输地质灾害大小" bindinput='bindinputSize' />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{size===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">是否编制地质灾害分布图</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{wonaghdmic}}' data-disasterindex='{{index}}' placeholder="请输地震地质空间展布" bindinput='bindinputWonaghdmic' />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{wonaghdmic===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">
+      岩性构造条件
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_vcode">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" value='{{lsc}}' placeholder="包括岩类、颜色、矿物成分、结构、构造、产状、其它（与上下岩层接触关系、有无生物化石、有无断层等)" bindinput='bindinputlsc' data-disasterindex='{{index}}' maxlength='200' style="height: 3.7em" />
+          <view class="weui-textarea-counter">{{lsc.length}}/200</view>
+        </view>
+        <view class="weui-cell__ft" wx:if="{{lsc===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">
+      水文地质条件
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_vcode">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" value='{{hc}}' placeholder="请输入水文地质条件" bindinput='bindinputhc' data-disasterindex='{{index}}' maxlength='200' style="height: 3.7em" />
+          <view class="weui-textarea-counter">{{hc.length}}/200</view>
+        </view>
+        <view class="weui-cell__ft" wx:if="{{hc===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">
+      变形机制分析
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_vcode">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" value='{{aodm}}' placeholder="请输入变形机制分析" bindinput='bindinputaodm' data-disasterindex='{{index}}' maxlength='200' style="height: 3.7em" />
+          <view class="weui-textarea-counter">{{aodm.length}}/200</view>
+        </view>
+        <view class="weui-cell__ft" wx:if="{{aodm===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">
+      烈度评定初步意见
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_vcode">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" value='{{pooeoi}}' placeholder="请输入烈度评定初步意见" bindinput='bindinputpooeoi' data-disasterindex='{{index}}' maxlength='200' style="height: 3.7em" />
+          <view class="weui-textarea-counter">{{pooeoi.length}}/200</view>
+        </view>
+        <view class="weui-cell__ft" wx:if="{{pooeoi===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">
+      烈度综合评定
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_vcode">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" value='{{ceoi}}' placeholder="请输入烈度综合评定" bindinput='bindinputceoi' data-disasterindex='{{index}}' maxlength='200' style="height: 3.7em" />
+          <view class="weui-textarea-counter">{{ceoi.length}}/200</view>
+        </view>
+        <view class="weui-cell__ft" wx:if="{{ceoi===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+
+
+    <view>
+      <view class="weui-cells__title">
+        资料清单
+      </view>
+      <radio-group bindchange="datumArrayfileTypeChange" data-disasterindex='{{index}}'>
+        <view class="flex_box">
+          <view class="flex_item">
+            <label class="{{datumArrayfileType==='image'?'active':''}}">
+              <radio value='image' checked='{{datumArrayfileType==="image"}}'>照片</radio>
+            </label>
+          </view>
+          <view class="flex_item">
+            <label class="{{datumArrayfileType==='video'?'active':''}}">
+              <radio value='video' checked='{{datumArrayfileType==="video"}}'>视频</radio>
+            </label>
+          </view>
+          <view class="flex_item">
+            <label class="{{datumArrayfileType==='audio'?'active':''}}">
+              <radio value='audio' checked='{{datumArrayfileType==="audio"}}'>录音</radio>
+            </label>
+          </view>
+        </view>
+      </radio-group>
+      <view class="weui-cells" wx:if="{{datumArrayfileType==='image'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">图片上传</view>
+                <view class="weui-uploader__info">{{datumArrayImages.length}}/9</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderdatumArrayImages">
+                  <block wx:for="{{datumArrayImages}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" data-target='datumArrayImages' data-index='{{idx}}' data-disasterindex='{{index}}' catchlongpress='delData' id="{{itemName}}">
+                      <image class="weui-uploader__img" src="{{itemName}}" mode="aspectFill" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{datumArrayImages.length<9}}">
+                  <view class="weui-uploader__input" data-disasterindex='{{index}}' bindtap="chooseImage" data-upname='datumArrayImages'></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells" wx:if="{{datumArrayfileType==='video'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">视频上传</view>
+                <view class="weui-uploader__info">{{datumArrayVideos.length}}/3</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderdatumArrayVideos">
+                  <block wx:for="{{datumArrayVideos}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" catchlongpress='delData' data-target='datumArrayVideos' data-index='{{idx}}' data-disasterindex='{{index}}' id="{{itemName}}">
+                      <video class="weui-uploader__img" src="{{itemName}}" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{datumArrayVideos.length<3}}">
+                  <view class="weui-uploader__input" data-disasterindex='{{index}}' bindtap="chooseVideo" data-upname='datumArrayVideos'></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells" wx:if="{{datumArrayfileType==='audio'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">录音上传</view>
+                <view class="weui-uploader__info">{{datumArrayAudios.length}}/5</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderdatumArrayAudios">
+                  <block wx:for="{{datumArrayAudios}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" id="{{itemName}}" data-target='datumArrayAudios' data-index='{{idx}}' data-disasterindex='{{index}}' catchlongpress='delData'>
+                      <audio src="{{itemName}}" name='录音{{idx+1}}' controls/>
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{datumArrayAudios.length<5}}">
+                  <view class="button-sp-area">
+                    <button class="weui-btn btnprimary" bindtap="chooseAudio" data-index='{{idx}}' data-disasterindex='{{index}}' wx:if="{{!datumArrayisRecoding}}" data-upname='datumArrayAudios'>点击开始录音</button>
+                    <button class="weui-btn" type="warn" bindtap="stopAudio" data-index='{{idx}}' data-disasterindex='{{index}}' wx:if="{{datumArrayisRecoding}}" data-upname='datumArrayAudios' plain="true">点击停止录音</button>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view>
+      <view class="weui-cells__title">
+        地震地质空间展布
+      </view>
+      <radio-group bindchange="sdosgfileTypeChange" data-disasterindex='{{index}}'>
+        <view class="flex_box">
+          <view class="flex_item">
+            <label class="{{sdosgfileType==='image'?'active':''}}">
+              <radio value='image' checked='{{sdosgfileType==="image"}}'>照片</radio>
+            </label>
+          </view>
+          <view class="flex_item">
+            <label class="{{sdosgfileType==='video'?'active':''}}">
+              <radio value='video' checked='{{sdosgfileType==="video"}}'>视频</radio>
+            </label>
+          </view>
+          <view class="flex_item">
+            <label class="{{sdosgfileType==='audio'?'active':''}}">
+              <radio value='audio' checked='{{sdosgfileType==="audio"}}'>录音</radio>
+            </label>
+          </view>
+        </view>
+      </radio-group>
+      <view class="weui-cells" wx:if="{{sdosgfileType==='image'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">图片上传</view>
+                <view class="weui-uploader__info">{{sdosgImages.length}}/9</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploadersdosgImages">
+                  <block wx:for="{{sdosgImages}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" data-target='sdosgImages' data-index='{{idx}}' data-disasterindex='{{index}}' catchlongpress='delData' id="{{itemName}}">
+                      <image class="weui-uploader__img" src="{{itemName}}" mode="aspectFill" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{sdosgImages.length<9}}">
+                  <view class="weui-uploader__input" data-disasterindex='{{index}}' bindtap="chooseImage" data-upname='sdosgImages'></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells" wx:if="{{sdosgfileType==='video'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">视频上传</view>
+                <view class="weui-uploader__info">{{sdosgVideos.length}}/3</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploadersdosgVideos">
+                  <block wx:for="{{sdosgVideos}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" catchlongpress='delData' data-target='sdosgVideos' data-index='{{idx}}' data-disasterindex='{{index}}' id="{{itemName}}">
+                      <video class="weui-uploader__img" src="{{itemName}}" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{sdosgVideos.length<3}}">
+                  <view class="weui-uploader__input" data-disasterindex='{{index}}' bindtap="chooseVideo" data-upname='sdosgVideos'></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells" wx:if="{{sdosgfileType==='audio'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">录音上传</view>
+                <view class="weui-uploader__info">{{sdosgAudios.length}}/5</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploadersdosgAudios">
+                  <block wx:for="{{sdosgAudios}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" id="{{itemName}}" data-target='sdosgAudios' data-index='{{idx}}' data-disasterindex='{{index}}' catchlongpress='delData'>
+                      <audio src="{{itemName}}" name='录音{{idx+1}}' controls/>
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{sdosgAudios.length<5}}">
+                  <view class="button-sp-area">
+                    <button class="weui-btn btnprimary" bindtap="chooseAudio" data-index='{{idx}}' data-disasterindex='{{index}}' wx:if="{{!sdosgisRecoding}}" data-upname='sdosgAudios'>点击开始录音</button>
+                    <button class="weui-btn" type="warn" bindtap="stopAudio" data-index='{{idx}}' data-disasterindex='{{index}}' wx:if="{{sdosgisRecoding}}" data-upname='sdosgAudios' plain="true">点击停止录音</button>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view>
+      <view class="weui-cells__title">
+        说明本次地震构造特征的相关图件
+      </view>
+      <radio-group bindchange="pictureArrayfileTypeChange" data-disasterindex='{{index}}'>
+        <view class="flex_box">
+          <view class="flex_item">
+            <label class="{{pictureArrayfileType==='image'?'active':''}}">
+              <radio value='image' checked='{{pictureArrayfileType==="image"}}'>照片</radio>
+            </label>
+          </view>
+          <view class="flex_item">
+            <label class="{{pictureArrayfileType==='video'?'active':''}}">
+              <radio value='video' checked='{{pictureArrayfileType==="video"}}'>视频</radio>
+            </label>
+          </view>
+          <view class="flex_item">
+            <label class="{{pictureArrayfileType==='audio'?'active':''}}">
+              <radio value='audio' checked='{{pictureArrayfileType==="audio"}}'>录音</radio>
+            </label>
+          </view>
+        </view>
+      </radio-group>
+      <view class="weui-cells" wx:if="{{pictureArrayfileType==='image'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">图片上传</view>
+                <view class="weui-uploader__info">{{pictureArrayImages.length}}/9</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderpictureArrayImages">
+                  <block wx:for="{{pictureArrayImages}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" data-target='pictureArrayImages' data-index='{{idx}}' data-disasterindex='{{index}}' catchlongpress='delData' id="{{itemName}}">
+                      <image class="weui-uploader__img" src="{{itemName}}" mode="aspectFill" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{pictureArrayImages.length<9}}">
+                  <view class="weui-uploader__input" data-disasterindex='{{index}}' bindtap="chooseImage" data-upname='pictureArrayImages'></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells" wx:if="{{pictureArrayfileType==='video'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">视频上传</view>
+                <view class="weui-uploader__info">{{pictureArrayVideos.length}}/3</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderpictureArrayVideos">
+                  <block wx:for="{{pictureArrayVideos}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" catchlongpress='delData' data-target='pictureArrayVideos' data-index='{{idx}}' data-disasterindex='{{index}}' id="{{itemName}}">
+                      <video class="weui-uploader__img" src="{{itemName}}" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{pictureArrayVideos.length<3}}">
+                  <view class="weui-uploader__input" data-disasterindex='{{index}}' bindtap="chooseVideo" data-upname='pictureArrayVideos'></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells" wx:if="{{pictureArrayfileType==='audio'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">录音上传</view>
+                <view class="weui-uploader__info">{{pictureArrayAudios.length}}/5</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderpictureArrayAudios">
+                  <block wx:for="{{pictureArrayAudios}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" id="{{itemName}}" data-target='pictureArrayAudios' data-index='{{idx}}' data-disasterindex='{{index}}' catchlongpress='delData'>
+                      <audio src="{{itemName}}" name='录音{{idx+1}}' controls/>
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{pictureArrayAudios.length<5}}">
+                  <view class="button-sp-area">
+                    <button class="weui-btn btnprimary" bindtap="chooseAudio" data-index='{{idx}}' data-disasterindex='{{index}}' wx:if="{{!pictureArrayisRecoding}}" data-upname='pictureArrayAudios'>点击开始录音</button>
+                    <button class="weui-btn" type="warn" bindtap="stopAudio" data-index='{{idx}}' data-disasterindex='{{index}}' wx:if="{{pictureArrayisRecoding}}" data-upname='pictureArrayAudios' plain="true">点击停止录音</button>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view>
+      <view class="weui-cells__title">
+        地震地质灾害现象描述
+      </view>
+      <radio-group bindchange="fileArrayfileTypeChange" data-disasterindex='{{index}}'>
+        <view class="flex_box">
+          <view class="flex_item">
+            <label class="{{fileArrayfileType==='image'?'active':''}}">
+              <radio value='image' checked='{{fileArrayfileType==="image"}}'>照片</radio>
+            </label>
+          </view>
+          <view class="flex_item">
+            <label class="{{fileArrayfileType==='video'?'active':''}}">
+              <radio value='video' checked='{{fileArrayfileType==="video"}}'>视频</radio>
+            </label>
+          </view>
+          <view class="flex_item">
+            <label class="{{fileArrayfileType==='audio'?'active':''}}">
+              <radio value='audio' checked='{{fileArrayfileType==="audio"}}'>录音</radio>
+            </label>
+          </view>
+        </view>
+      </radio-group>
+      <view class="weui-cells" wx:if="{{fileArrayfileType==='image'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">图片上传</view>
+                <view class="weui-uploader__info">{{fileArrayImages.length}}/9</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderfileArrayImages">
+                  <block wx:for="{{fileArrayImages}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" data-target='fileArrayImages' data-index='{{idx}}' data-disasterindex='{{index}}' catchlongpress='delData' id="{{itemName}}">
+                      <image class="weui-uploader__img" src="{{itemName}}" mode="aspectFill" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{fileArrayImages.length<9}}">
+                  <view class="weui-uploader__input" data-disasterindex='{{index}}' bindtap="chooseImage" data-upname='fileArrayImages'></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells" wx:if="{{fileArrayfileType==='video'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">视频上传</view>
+                <view class="weui-uploader__info">{{fileArrayVideos.length}}/3</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderfileArrayVideos">
+                  <block wx:for="{{fileArrayVideos}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" catchlongpress='delData' data-target='fileArrayVideos' data-index='{{idx}}' data-disasterindex='{{index}}' id="{{itemName}}">
+                      <video class="weui-uploader__img" src="{{itemName}}" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{fileArrayVideos.length<3}}">
+                  <view class="weui-uploader__input" data-disasterindex='{{index}}' bindtap="chooseVideo" data-upname='fileArrayVideos'></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells" wx:if="{{fileArrayfileType==='audio'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">录音上传</view>
+                <view class="weui-uploader__info">{{fileArrayAudios.length}}/5</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderfileArrayAudios">
+                  <block wx:for="{{fileArrayAudios}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" id="{{itemName}}" data-target='fileArrayAudios' data-index='{{idx}}' data-disasterindex='{{index}}' catchlongpress='delData'>
+                      <audio src="{{itemName}}" name='录音{{idx+1}}' controls/>
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{fileArrayAudios.length<5}}">
+                  <view class="button-sp-area">
+                    <button class="weui-btn btnprimary" bindtap="chooseAudio" data-index='{{idx}}' data-disasterindex='{{index}}' wx:if="{{!fileArrayisRecoding}}" data-upname='fileArrayAudios'>点击开始录音</button>
+                    <button class="weui-btn" type="warn" bindtap="stopAudio" data-index='{{idx}}' data-disasterindex='{{index}}' wx:if="{{fileArrayisRecoding}}" data-upname='fileArrayAudios' plain="true">点击停止录音</button>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view>
+      <view class="weui-cells__title">
+        平面及剖面示意图
+      </view>
+      <radio-group bindchange="sdopasfileTypeChange" data-disasterindex='{{index}}'>
+        <view class="flex_box">
+          <view class="flex_item">
+            <label class="{{sdopasfileType==='image'?'active':''}}">
+              <radio value='image' checked='{{sdopasfileType==="image"}}'>照片</radio>
+            </label>
+          </view>
+          <view class="flex_item">
+            <label class="{{sdopasfileType==='video'?'active':''}}">
+              <radio value='video' checked='{{sdopasfileType==="video"}}'>视频</radio>
+            </label>
+          </view>
+          <view class="flex_item">
+            <label class="{{sdopasfileType==='audio'?'active':''}}">
+              <radio value='audio' checked='{{sdopasfileType==="audio"}}'>录音</radio>
+            </label>
+          </view>
+        </view>
+      </radio-group>
+      <view class="weui-cells" wx:if="{{sdopasfileType==='image'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">图片上传</view>
+                <view class="weui-uploader__info">{{sdopasImages.length}}/9</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploadersdopasImages">
+                  <block wx:for="{{sdopasImages}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" data-target='sdopasImages' data-index='{{idx}}' data-disasterindex='{{index}}' catchlongpress='delData' id="{{itemName}}">
+                      <image class="weui-uploader__img" src="{{itemName}}" mode="aspectFill" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{sdopasImages.length<9}}">
+                  <view class="weui-uploader__input" data-disasterindex='{{index}}' bindtap="chooseImage" data-upname='sdopasImages'></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells" wx:if="{{sdopasfileType==='video'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">视频上传</view>
+                <view class="weui-uploader__info">{{sdopasVideos.length}}/3</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploadersdopasVideos">
+                  <block wx:for="{{sdopasVideos}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" catchlongpress='delData' data-target='sdopasVideos' data-index='{{idx}}' data-disasterindex='{{index}}' id="{{itemName}}">
+                      <video class="weui-uploader__img" src="{{itemName}}" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{sdopasVideos.length<3}}">
+                  <view class="weui-uploader__input" data-disasterindex='{{index}}' bindtap="chooseVideo" data-upname='sdopasVideos'></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells" wx:if="{{sdopasfileType==='audio'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">录音上传</view>
+                <view class="weui-uploader__info">{{sdopasAudios.length}}/5</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploadersdopasAudios">
+                  <block wx:for="{{sdopasAudios}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" id="{{itemName}}" data-target='sdopasAudios' data-index='{{idx}}' data-disasterindex='{{index}}' catchlongpress='delData'>
+                      <audio src="{{itemName}}" name='录音{{idx+1}}' controls/>
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{sdopasAudios.length<5}}">
+                  <view class="button-sp-area">
+                    <button class="weui-btn btnprimary" bindtap="chooseAudio" data-index='{{idx}}' data-disasterindex='{{index}}' wx:if="{{!sdopasisRecoding}}" data-upname='sdopasAudios'>点击开始录音</button>
+                    <button class="weui-btn" type="warn" bindtap="stopAudio" data-index='{{idx}}' data-disasterindex='{{index}}' wx:if="{{sdopasisRecoding}}" data-upname='sdopasAudios' plain="true">点击停止录音</button>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+      <view class="weui-cells__title">
+        <view class="weui-badge" style='background-color:#e64340;'>输入“del”来移除本调查点</view>
+      </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input weui-cell_access">
+          <view class="weui-cell__bd modify_bd">
+            <input class="weui-input" bindinput='bindStatus' data-disasterindex='{{index}}' placeholder="请输入：del" />
+          </view>
+          <view class="weui-cell__ft" wx:if="{{status==='del'}}">
+            <view class="weui-badge" style='background-color:#e64340;' bindtap='removeSurvey' data-disasterindex='{{index}}'>点击移除</view>
+          </view>
+        </view>
+      </view>
+  </view>
+</template>

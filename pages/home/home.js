@@ -150,6 +150,30 @@ Page({
     })
   },
 
+  binddizhizaihaidiaocha: function(){
+    var that = this;
+    if (!that.data.earthquakeId) {
+      wx.showModal({
+        title: '操作失败',
+        content: '请先选择地震信息',
+      });
+      return;
+    }
+    if (!that.data.group.id || !that.data.group.isLeader || !that.data.group.groupNumbering) {
+      console.log(that.data.group)
+      wx.showModal({
+        title: '操作失败',
+        content: '请先完善小组信息',
+      });
+      return;
+    }
+    wx.navigateTo({
+      url: '/pages/disasterSurvey/disasterSurvey?earthquakeId=' + that.data.earthquakeId,
+    })
+
+  },
+
+
   bindxinxigongxiang: function() {
     var that = this;
     if (!that.data.earthquakeId) {
