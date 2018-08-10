@@ -122,10 +122,9 @@
           <view class="weui-label">是否编制地质灾害分布图</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" value='{{wonaghdmic}}' data-disasterindex='{{index}}' placeholder="请输地震地质空间展布" bindinput='bindinputWonaghdmic' />
-        </view>
-        <view class="weui-cell__ft" wx:if="{{wonaghdmic===''}}">
-          <icon type="warn" size="23" color="#E64340"></icon>
+          <picker bindchange="bindWonaghdmicChange" data-disasterindex='{{index}}' value="{{wonaghdmicIndex}}" range="{{wonaghdmicRange}}">
+            <view class="weui-select weui-select_in-select-after">{{wonaghdmicRange[wonaghdmicIndex]}}</view>
+          </picker>
         </view>
       </view>
     </view>

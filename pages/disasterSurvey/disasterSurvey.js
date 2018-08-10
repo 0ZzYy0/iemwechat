@@ -164,6 +164,11 @@ Page({
     disaster.shape = '';
 
 
+    disaster.wonaghdmicRange = ['是', '否'];
+    disaster.wonaghdmicIndex = 0;
+    disaster.wonaghdmic = '';
+
+
     disaster.datumArrayfileType = "image";
     disaster.datumArray = [];
     disaster.datumArrayAudios = [];
@@ -215,7 +220,7 @@ Page({
     disaster.sdopasImagesData = [];
 
     disaster.time = dateTime;
-    disaster.wonaghdmic = '';
+    
     disaster.size = '';
     disaster.adderss = '';
     disaster.lsc = '';
@@ -274,6 +279,18 @@ Page({
     let singleIndex = event.currentTarget.dataset.disasterindex;
     disasterLists[singleIndex].shapeIndex = val;
     disasterLists[singleIndex].shape = disasterLists[singleIndex].shapeRange[val];
+    that.setData({
+      disasterLists: disasterLists
+    })
+  },
+
+  bindWonaghdmicChange: function (event) {
+    let that = this;
+    let val = event.detail.value;
+    let disasterLists = that.data.disasterLists;
+    let singleIndex = event.currentTarget.dataset.disasterindex;
+    disasterLists[singleIndex].wonaghdmicIndex = val;
+    disasterLists[singleIndex].wonaghdmic = disasterLists[singleIndex].wonaghdmicRange[val];
     that.setData({
       disasterLists: disasterLists
     })
@@ -650,12 +667,15 @@ Page({
     let intensityRange = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
     let typeRange = ['地裂', '滑坡', '堰塞', '崩塌', '砂土液化', '震陷', '其它'];
     let shapeRange = ['雁行式', '直线状', '锯齿状', '弧形', '地裂带', '其它'];
+    let wonaghdmicRange = ['是', '否'];
 
     for (var i = 0; i < disasterLists.length; i++) {
       disasterLists[i].index = i;
       disasterLists[i].intensityRange = intensityRange;
       disasterLists[i].typeRange = typeRange;
       disasterLists[i].shapeRange = shapeRange;
+      disasterLists[i].wonaghdmicRange = wonaghdmicRange;
+
       disasterLists[i].fileType = disasterLists[i].fileType === undefined ? "image" : disasterLists[i].fileType;
 
       disasterLists[i].datumArrayisRecoding = false;
@@ -681,6 +701,13 @@ Page({
           disasterLists[i].shapeIndex = j;
         }
       }
+
+      for (var j = 0; j < wonaghdmicRange.length; j++) {
+        if (disasterLists[i].wonaghdmic === wonaghdmicRange[j]) {
+          disasterLists[i].wonaghdmicIndex = j;
+        }
+      }
+
     }
     return disasterLists;
   },
@@ -709,9 +736,6 @@ Page({
   },
   bindinputSize: function(e) {
     this.replaceContent(e, "size");
-  },
-  bindinputWonaghdmic: function(e) {
-    this.replaceContent(e, "wonaghdmic");
   },
   bindinputAdderss: function(e) {
     this.replaceContent(e, "adderss");
