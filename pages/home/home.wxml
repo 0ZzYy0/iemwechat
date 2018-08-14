@@ -29,7 +29,9 @@
             <view class="weui-label">是否组长</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" name="isLeader" id='' disabled="{{!editable}}" placeholder="是/否" value='{{group.isLeader}}' />
+            <picker bindchange="bindIsLeaderhange" value="{{isLeaderIndex}}" range="{{isLeaderRange}}"  disabled="{{!editable}}" >
+              <view class="weui-select weui-select_in-select-after">{{isLeaderRange[isLeaderIndex]}}</view>
+            </picker>
           </view>
           <view class="weui-cell__ft" wx:if="{{editable}}">
             <button formType="submit">
@@ -46,7 +48,7 @@
           <view class="weui-label">地震选择</view>
         </view>
         <view class="weui-cell__bd">
-          <picker bindchange="bindEQChange" value="{{itemsIndex}}" range="{{earthquakes}}">
+          <picker bindchange="bindEQChange" value="{{itemsIndex}}" range="{{earthquakes}}" >
             <view class="weui-select weui-select_in-select-after">{{earthquakes[itemsIndex]}}</view>
           </picker>
         </view>

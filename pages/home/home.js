@@ -15,7 +15,11 @@ Page({
     items: [],
     itemsIndex: 0,
     earthquakeId: "",
-    group: {}
+    group: {},
+
+    isLeader:'',
+    isLeaderIndex:0,
+    isLeaderRange:['是','否']
   },
 
 
@@ -30,10 +34,7 @@ Page({
     }
     let that = this;
     let group = that.data.group;
-    console.log(group)
     group.groupNumbering = e.detail.value.groupNumbering;
-    group.isLeader = e.detail.value.isLeader;
-    console.log(e.detail.value.isLeader);
     if (group.groupNumbering == "") {
       wx.showModal({
         title: '操作失败',
@@ -45,7 +46,6 @@ Page({
       group.customerId = app.globalData.customer.id;
       group.earthquakeId = that.data.earthquakeId;
       group.name = app.globalData.customer.name;
-      console.log(group);
       wx.request({
         method: "POST",
         url: server + "/group/join",
@@ -55,7 +55,6 @@ Page({
           'Cookie': 'JSESSIONID=' + app.globalData.JSESSIONID
         },
         success: function(res) {
-          console.log(res.data);
           that.setData({
             group: res.data,
             editable: !that.data.editable
@@ -85,6 +84,24 @@ Page({
     }
 
 
+  },
+  bindIsLeaderhange:function(e){
+    let that = this;
+    let isLeader = that.data.isLeader;
+    let isLeaderIndex = that.data.isLeaderIndex;
+    let isLeaderRange = that.data.isLeaderRange;
+    console.log(isLeader);
+    isLeader = isLeaderRange[e.detail.value];
+    console.log(isLeader);
+    let cxtgroup = that.data.group;
+    cxtgroup.isLeader = isLeader;
+
+    that.setData({
+      isLeaderIndex: e.detail.value,
+      isLeader: isLeader,
+      group: cxtgroup
+    });
+    console.log(that.data.group); 
   },
   bindEQChange: function(e) {
     console.log('picker发生change事件，携带value值为：', e);
@@ -273,6 +290,25 @@ Page({
           items.forEach(function(n) {
             earthquakes.push(n.name)
           })
+          console.log(res.data.group);
+          console.log(res.data.group);
+          let isLeader = that.data.isLeader;
+          let isLeaderRange = that.data.isLeaderRange;
+          let isLeaderIndex = that.data.isLeaderIndex;
+
+
+          for (var j = 0; j < isLeaderRange.length; j++) {
+            if (res.data.group.isLeader === isLeaderRange[j]) {
+              isLeader = res.data.group.isLeader;
+              isLeaderIndex = j;
+              that.setData({
+                isLeader: isLeader,
+                isLeaderIndex: isLeaderIndex
+              })
+            }
+          }
+
+          
           that.setData({
             items: items,
             group: res.data.group,
