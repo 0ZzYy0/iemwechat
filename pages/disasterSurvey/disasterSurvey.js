@@ -39,7 +39,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     if (!utils.checkSession()) {
       wx.navigateBack({});
       return;
@@ -60,7 +60,7 @@ Page({
         'content-type': 'application/json',
         'Cookie': 'JSESSIONID=' + app.globalData.JSESSIONID
       },
-      success: function(res) {
+      success: function (res) {
         disasterLists = res.data;
         for (var i = 0; i < disasterLists.length; i++) {
           disasterLists[i].status = "working";
@@ -69,6 +69,7 @@ Page({
           disasterLists[i].pictureArrayfileType = 'image';
           disasterLists[i].fileArrayfileType = 'image';
           disasterLists[i].sdopasfileType = 'image';
+          disasterLists[i].remarksfileType = 'image';
         }
         disasterLists = that.formatDisasterLists(disasterLists);
         that.setData({
@@ -76,7 +77,7 @@ Page({
           earthquakeId: options.earthquakeId
         })
       },
-      fail: function(res) {
+      fail: function (res) {
         wx.showModal({
           title: '操作失败',
           content: '请检查网络或其他问题后重试',
@@ -89,54 +90,54 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
 
   //新增调查
-  addsurvey: function() {
+  addsurvey: function () {
     let that = this;
     let disaster = {};
 
@@ -152,27 +153,32 @@ Page({
     disaster.name = '';
     disaster.lng = '';
     disaster.lat = '';
-    disaster.intensityRange = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-    disaster.intensityIndex = 0;
+    disaster.intensityIndex = '';
 
-    disaster.typeRange = ['地裂', '滑坡', '堰塞', '崩塌', '砂土液化', '震陷', '其它'];
+    disaster.pooeoiRange = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+    disaster.pooeoiIndex = 0;
+    disaster.pooeoi = 'I';
+
+    disaster.ceoiRange = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+    disaster.ceoiIndex = 0;
+    disaster.ceoi = 'I';
+
+    disaster.typeRange = ['其它', '地裂', '滑坡', '堰塞', '崩塌', '砂土液化', '震陷'];
     disaster.typeIndex = 0;
-    disaster.type = '';
+    disaster.type = '其它';
 
-    disaster.shapeRange = ['雁行式', '直线状', '锯齿状', '弧形', '地裂带', '其它'];
+    disaster.shapeRange = ['其它', '雁行式', '直线状', '锯齿状', '弧形', '地裂带'];
     disaster.shapeIndex = 0;
-    disaster.shape = '';
+    disaster.shape = '其它';
 
-
-    disaster.wonaghdmicRange = ['是', '否'];
+    disaster.wonaghdmicRange = ['否', '是'];
     disaster.wonaghdmicIndex = 0;
-    disaster.wonaghdmic = '';
-
+    disaster.wonaghdmic = '否';
 
     disaster.datumArrayfileType = "image";
     disaster.datumArray = [];
     disaster.datumArrayAudios = [];
-    disaster.datumArrayisRecoding = 'false';
+    disaster.datumArrayisRecoding = false;
     disaster.datumArrayVideos = [];
     disaster.datumArrayImages = [];
     disaster.datumArrayAudiosData = [];
@@ -182,7 +188,7 @@ Page({
     disaster.sdosgfileType = "image";
     disaster.sdosg = [];
     disaster.sdosgAudios = [];
-    disaster.sdosgisRecoding = 'false';
+    disaster.sdosgisRecoding = false;
     disaster.sdosgVideos = [];
     disaster.sdosgImages = [];
     disaster.sdosgAudiosData = [];
@@ -192,7 +198,7 @@ Page({
     disaster.pictureArrayfileType = "image";
     disaster.pictureArray = [];
     disaster.pictureArrayAudios = [];
-    disaster.pictureArrayisRecoding = 'false';
+    disaster.pictureArrayisRecoding = false;
     disaster.pictureArrayVideos = [];
     disaster.pictureArrayImages = [];
     disaster.pictureArrayAudiosData = [];
@@ -202,7 +208,7 @@ Page({
     disaster.fileArrayfileType = "image";
     disaster.fileArray = [];
     disaster.fileArrayAudios = [];
-    disaster.fileArrayisRecoding = 'false';
+    disaster.fileArrayisRecoding = false;
     disaster.fileArrayVideos = [];
     disaster.fileArrayImages = [];
     disaster.fileArrayAudiosData = [];
@@ -212,33 +218,42 @@ Page({
     disaster.sdopasfileType = "image";
     disaster.sdopas = [];
     disaster.sdopasAudios = [];
-    disaster.sdopasisRecoding = 'false';
+    disaster.sdopasisRecoding = false;
     disaster.sdopasVideos = [];
     disaster.sdopasImages = [];
     disaster.sdopasAudiosData = [];
     disaster.sdopasVideosData = [];
     disaster.sdopasImagesData = [];
 
+    disaster.remarksfileType = "image";
+    disaster.remarks = [];
+    disaster.remarksAudios = [];
+    disaster.remarksisRecoding = false;
+    disaster.remarksVideos = [];
+    disaster.remarksImages = [];
+    disaster.remarksAudiosData = [];
+    disaster.remarksVideosData = [];
+    disaster.remarksImagesData = [];
+
     disaster.time = dateTime;
-    
+
     disaster.size = '';
     disaster.adderss = '';
     disaster.lsc = '';
     disaster.hc = '';
     disaster.aodm = '';
-    disaster.pooeoi = '';
-    disaster.ceoi = '';
     //用来控制删除
     disaster.status = 'working';
 
 
     wx.chooseLocation({
-      success: function(res) {
+      success: function (res) {
         disaster.lat = res.latitude;
         disaster.lng = res.longitude;
         disaster.name = res.address + " " + res.name;
         disaster.adderss = res.address + " " + res.name;
         disaster.altitude = "";
+
         disasterLists.push(disaster);
         that.setData({
           disasterLists: disasterLists
@@ -247,9 +262,7 @@ Page({
     })
   },
 
-
-
-  bindIntensityChange: function(event) {
+  bindIntensityChange: function (event) {
     let that = this;
     let val = event.detail.value;
     let disasterLists = that.data.disasterLists;
@@ -260,7 +273,31 @@ Page({
     })
   },
 
-  bindTypeChange: function(event) {
+  bindPooeoiChange: function (event) {
+    let that = this;
+    let val = event.detail.value;
+    let disasterLists = that.data.disasterLists;
+    let singleIndex = event.currentTarget.dataset.disasterindex;
+    disasterLists[singleIndex].pooeoiIndex = val;
+    disasterLists[singleIndex].pooeoi = disasterLists[singleIndex].pooeoiRange[val];
+    that.setData({
+      disasterLists: disasterLists
+    })
+  },
+
+  bindCeoiChange: function (event) {
+    let that = this;
+    let val = event.detail.value;
+    let disasterLists = that.data.disasterLists;
+    let singleIndex = event.currentTarget.dataset.disasterindex;
+    disasterLists[singleIndex].ceoiIndex = val;
+    disasterLists[singleIndex].ceoi = disasterLists[singleIndex].ceoiRange[val];
+    that.setData({
+      disasterLists: disasterLists
+    })
+  },
+
+  bindTypeChange: function (event) {
     let that = this;
     let val = event.detail.value;
     let disasterLists = that.data.disasterLists;
@@ -272,7 +309,7 @@ Page({
     })
   },
 
-  bindShapeChange: function(event) {
+  bindShapeChange: function (event) {
     let that = this;
     let val = event.detail.value;
     let disasterLists = that.data.disasterLists;
@@ -296,7 +333,7 @@ Page({
     })
   },
 
-  chooseImage: function(e) {
+  chooseImage: function (e) {
     let that = this;
     let singleIndex = e.currentTarget.dataset.disasterindex;
     let upName = e.currentTarget.dataset.upname;
@@ -305,7 +342,7 @@ Page({
     wx.chooseImage({
       sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function(res) {
+      success: function (res) {
         wx.uploadFile({
           url: server + '/fileentity/upload',
           header: {
@@ -320,7 +357,7 @@ Page({
           },
           filePath: res.tempFilePaths[0],
           name: 'file',
-          success: function(res) {
+          success: function (res) {
             let fileData = JSON.parse(res.data);
             if (fileData.errorMsg !== 'ok') {
               wx.showModal({
@@ -345,8 +382,12 @@ Page({
             } else if (upName == 'sdopasImages') {
               disasterSurveyList[singleIndex].sdopasImagesData = disasterSurveyList[singleIndex].sdopasImagesData.concat(fileData.data);
               disasterSurveyList[singleIndex].sdopasImages = disasterSurveyList[singleIndex].sdopasImages.concat(server + fileData.data.uri);
+            } else if (upName == 'remarksImages') {
+              disasterSurveyList[singleIndex].remarksImagesData = disasterSurveyList[singleIndex].remarksImagesData.concat(fileData.data);
+              disasterSurveyList[singleIndex].remarksImages = disasterSurveyList[singleIndex].remarksImages.concat(server + fileData.data.uri);
             }
-
+            
+            
 
             that.setData({
               disasterLists: disasterSurveyList
@@ -357,7 +398,7 @@ Page({
       }
     })
   },
-  chooseVideo: function(e) {
+  chooseVideo: function (e) {
     let that = this;
     let upName = e.currentTarget.dataset.upname;
     let singleIndex = e.currentTarget.dataset.disasterindex;
@@ -366,7 +407,7 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       maxDuration: 30,
       camera: 'back',
-      success: function(res) {
+      success: function (res) {
         if (res.size > 5000000) {
           wx.showModal({
             title: '操作失败',
@@ -388,7 +429,7 @@ Page({
           },
           filePath: res.tempFilePath,
           name: 'file',
-          success: function(res) {
+          success: function (res) {
 
             let fileData = JSON.parse(res.data);
             if (fileData.errorMsg !== 'ok') {
@@ -414,8 +455,10 @@ Page({
             } else if (upName == 'sdopasVideos') {
               disasterSurveyList[singleIndex].sdopasVideosData = disasterSurveyList[singleIndex].sdopasVideosData.concat(fileData.data);
               disasterSurveyList[singleIndex].sdopasVideos = disasterSurveyList[singleIndex].sdopasVideos.concat(server + fileData.data.uri);
+            } else if (upName == 'remarksVideos') {
+              disasterSurveyList[singleIndex].remarksVideosData = disasterSurveyList[singleIndex].remarksVideosData.concat(fileData.data);
+              disasterSurveyList[singleIndex].remarksVideos = disasterSurveyList[singleIndex].remarksVideos.concat(server + fileData.data.uri);
             }
-
 
             that.setData({
               disasterLists: disasterSurveyList
@@ -426,7 +469,7 @@ Page({
       }
     })
   },
-  chooseAudio: function(e) {
+  chooseAudio: function (e) {
     recorderManager.start(options);
     let that = this;
     let upName = e.currentTarget.dataset.upname;
@@ -444,12 +487,15 @@ Page({
       disasterSurveyList[singleIndex].fileArrayisRecoding = !disasterSurveyList[singleIndex].fileArrayisRecoding;
     } else if (upName == 'sdopasAudios') {
       disasterSurveyList[singleIndex].sdopasisRecoding = !disasterSurveyList[singleIndex].sdopasisRecoding;
+    } else if (upName == 'remarksAudios') {
+      disasterSurveyList[singleIndex].remarksisRecoding = !disasterSurveyList[singleIndex].remarksisRecoding;
     }
+
     that.setData({
       disasterLists: disasterSurveyList
     })
   },
-  stopAudio: function(e) {
+  stopAudio: function (e) {
     recorderManager.stop();
     let that = this;
     let upName = e.currentTarget.dataset.upname;
@@ -467,7 +513,10 @@ Page({
       disasterSurveyList[singleIndex].fileArrayisRecoding = !disasterSurveyList[singleIndex].fileArrayisRecoding;
     } else if (upName == 'sdopasAudios') {
       disasterSurveyList[singleIndex].sdopasisRecoding = !disasterSurveyList[singleIndex].sdopasisRecoding;
+    } else if (upName == 'remarksAudios') {
+      disasterSurveyList[singleIndex].remarksisRecoding = !disasterSurveyList[singleIndex].remarksisRecoding;
     }
+
     recorderManager.onStop((res) => {
       wx.uploadFile({
         url: server + '/fileentity/upload',
@@ -483,7 +532,7 @@ Page({
         },
         filePath: res.tempFilePath,
         name: 'file',
-        success: function(res) {
+        success: function (res) {
           let fileData = JSON.parse(res.data);
           if (fileData.errorMsg !== 'ok') {
             wx.showModal({
@@ -508,7 +557,11 @@ Page({
           } else if (upName == 'sdopasAudios') {
             disasterSurveyList[singleIndex].sdopasAudiosData = disasterSurveyList[singleIndex].sdopasAudiosData.concat(fileData.data);
             disasterSurveyList[singleIndex].sdopasAudios = disasterSurveyList[singleIndex].sdopasAudios.concat(server + fileData.data.uri);
+          } else if (upName == 'remarksAudios') {
+            disasterSurveyList[singleIndex].remarksAudiosData = disasterSurveyList[singleIndex].remarksAudiosData.concat(fileData.data);
+            disasterSurveyList[singleIndex].remarksAudios = disasterSurveyList[singleIndex].remarksAudios.concat(server + fileData.data.uri);
           }
+
           that.setData({
             disasterLists: disasterSurveyList
           });
@@ -518,7 +571,7 @@ Page({
     })
   },
 
-  delData: function(e) {
+  delData: function (e) {
     if (!utils.checkSession()) {
       return;
     }
@@ -531,7 +584,7 @@ Page({
     wx.showModal({
       title: '删除此文件？',
       content: '点击确定删除此文件',
-      success: function(me) {
+      success: function (me) {
 
         if (me.confirm) {
 
@@ -546,7 +599,7 @@ Page({
               'content-type': 'application/x-www-form-urlencoded',
               'Cookie': 'JSESSIONID=' + app.globalData.JSESSIONID
             },
-            success: function(res) {
+            success: function (res) {
               let datas = disasterSurveyList[singleIndex][target];
               datas.splice(index, 1);
               disasterSurveyList[singleIndex][target] = datas;
@@ -564,7 +617,7 @@ Page({
                 duration: 2000,
               })
             },
-            fail: function(res) {
+            fail: function (res) {
               wx.showModal({
                 title: '操作失败',
                 content: '请检查网络或其他问题后重试',
@@ -577,7 +630,7 @@ Page({
     })
   },
 
-  saveAll: function(e) {
+  saveAll: function (e) {
     if (!utils.checkSession()) {
       return;
     }
@@ -593,7 +646,7 @@ Page({
         'content-type': 'application/json',
         'Cookie': 'JSESSIONID=' + app.globalData.JSESSIONID
       },
-      success: function(res) {
+      success: function (res) {
         //let list = res.data;
         //list = that.formatDisasterLists(list);
         //that.setData({
@@ -607,7 +660,7 @@ Page({
           })
         }
       },
-      fail: function(res) {
+      fail: function (res) {
         wx.showModal({
           title: '操作失败',
           content: '请检查网络或其他问题后重试',
@@ -617,7 +670,7 @@ Page({
   },
 
   //删除一组数据
-  removeSurvey: function(event) {
+  removeSurvey: function (event) {
     if (!utils.checkSession()) {
       return;
     }
@@ -625,7 +678,7 @@ Page({
     wx.showModal({
       title: '移除调查点',
       content: '点击确定移除本调查点（请谨慎操作）！',
-      success: function(modalevent) {
+      success: function (modalevent) {
         if (modalevent.confirm) {
           let serveyIndex = event.currentTarget.dataset.disasterindex;
           let disasterLists = that.data.disasterLists;
@@ -638,7 +691,7 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded',
                 'Cookie': 'JSESSIONID=' + app.globalData.JSESSIONID
               },
-              success: function(res) {
+              success: function (res) {
                 wx.showToast({
                   title: '删除成功！',
                   icon: "success",
@@ -649,7 +702,7 @@ Page({
                 })
 
               },
-              fail: function(res) {
+              fail: function (res) {
                 wx.showModal({
                   title: '操作失败',
                   content: '请检查网络或其他问题后重试',
@@ -663,15 +716,22 @@ Page({
     })
   },
 
-  formatDisasterLists: function(disasterLists) {
+  formatDisasterLists: function (disasterLists) {
     let intensityRange = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-    let typeRange = ['地裂', '滑坡', '堰塞', '崩塌', '砂土液化', '震陷', '其它'];
-    let shapeRange = ['雁行式', '直线状', '锯齿状', '弧形', '地裂带', '其它'];
-    let wonaghdmicRange = ['是', '否'];
+    let pooeoiRange = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+    let ceoiRange = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+    
+    let typeRange = ['其它', '地裂', '滑坡', '堰塞', '崩塌', '砂土液化', '震陷'];
+    let shapeRange = ['其它', '雁行式', '直线状', '锯齿状', '弧形', '地裂带'];
+    let wonaghdmicRange = ['否', '是'];
 
     for (var i = 0; i < disasterLists.length; i++) {
       disasterLists[i].index = i;
       disasterLists[i].intensityRange = intensityRange;
+      disasterLists[i].pooeoiRange = pooeoiRange;
+      disasterLists[i].ceoiRange = ceoiRange;
+      
+
       disasterLists[i].typeRange = typeRange;
       disasterLists[i].shapeRange = shapeRange;
       disasterLists[i].wonaghdmicRange = wonaghdmicRange;
@@ -683,6 +743,7 @@ Page({
       disasterLists[i].pictureArrayisRecoding = false;
       disasterLists[i].fileArrayisRecoding = false;
       disasterLists[i].sdopasisRecoding = false;
+      disasterLists[i].remarksisRecoding = false;
 
       for (var j = 0; j < intensityRange.length; j++) {
         if (disasterLists[i].intensity === intensityRange[j]) {
@@ -690,6 +751,18 @@ Page({
         }
       }
 
+      for (var j = 0; j < pooeoiRange.length; j++) {
+        if (disasterLists[i].pooeoi === pooeoiRange[j]) {
+          disasterLists[i].pooeoiIndex = j;
+        }
+      }
+
+      for (var j = 0; j < ceoiRange.length; j++) {
+        if (disasterLists[i].ceoi === ceoiRange[j]) {
+          disasterLists[i].ceoiIndex = j;
+        }
+      }
+      
       for (var j = 0; j < typeRange.length; j++) {
         if (disasterLists[i].type === typeRange[j]) {
           disasterLists[i].typeIndex = j;
@@ -712,7 +785,7 @@ Page({
     return disasterLists;
   },
   //前台input发生改动之后自动更新后台值
-  replaceContent: function(event, keyStr) {
+  replaceContent: function (event, keyStr) {
     let that = this;
     let key = event.detail.value;
     let disasterLists = that.data.disasterLists;
@@ -722,59 +795,58 @@ Page({
       disasterLists: disasterLists
     })
   },
-  bindinputName: function(e) {
+  bindinputName: function (e) {
     this.replaceContent(e, "name");
   },
-  bindinputLng: function(e) {
+  bindinputLng: function (e) {
     this.replaceContent(e, "lng");
   },
-  bindinputLat: function(e) {
+  bindinputLat: function (e) {
     this.replaceContent(e, "lat");
   },
-  bindinputTime: function(e) {
+  bindinputIntensityIndex: function (e) {
+    this.replaceContent(e, "intensityIndex");
+  },
+  bindinputTime: function (e) {
     this.replaceContent(e, "time");
   },
-  bindinputSize: function(e) {
+  bindinputSize: function (e) {
     this.replaceContent(e, "size");
   },
-  bindinputAdderss: function(e) {
+  bindinputAdderss: function (e) {
     this.replaceContent(e, "adderss");
   },
-  bindinputlsc: function(e) {
+  bindinputlsc: function (e) {
     this.replaceContent(e, "lsc");
   },
-  bindinputhc: function(e) {
+  bindinputhc: function (e) {
     this.replaceContent(e, "hc");
   },
-  bindinputaodm: function(e) {
+  bindinputaodm: function (e) {
     this.replaceContent(e, "aodm");
   },
-  bindinputpooeoi: function(e) {
-    this.replaceContent(e, "pooeoi");
-  },
-  bindinputceoi: function(e) {
-    this.replaceContent(e, "ceoi");
-  },
-  bindinputaAderss: function(e) {
+  bindinputaAderss: function (e) {
     this.replaceContent(e, "aderss");
   },
-  datumArrayfileTypeChange: function(e) {
+  datumArrayfileTypeChange: function (e) {
     this.replaceContent(e, "datumArrayfileType");
   },
-  bindStatus: function(e) {
+  bindStatus: function (e) {
     this.replaceContent(e, "status");
   },
-  sdosgfileTypeChange: function(e) {
+  sdosgfileTypeChange: function (e) {
     this.replaceContent(e, "sdosgfileType");
   },
-  pictureArrayfileTypeChange: function(e) {
+  pictureArrayfileTypeChange: function (e) {
     this.replaceContent(e, "pictureArrayfileType");
   },
-  fileArrayfileTypeChange: function(e) {
+  fileArrayfileTypeChange: function (e) {
     this.replaceContent(e, "fileArrayfileType");
   },
-  sdopasfileTypeChange: function(e) {
+  sdopasfileTypeChange: function (e) {
     this.replaceContent(e, "sdopasfileType");
   },
-
+  remarksfileTypeChange: function (e) {
+    this.replaceContent(e, "remarksfileType");
+  }
 })

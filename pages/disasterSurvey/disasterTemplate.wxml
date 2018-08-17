@@ -2,7 +2,7 @@
   <view class='disasterTemplate'>
 
     <view class="weui-cells__title">
-      <view class="weui-badge">{{index+1}}、</view>调查名称
+      <view class="weui-badge">{{index+1}}、</view>调查点名称
     </view>
     <view class="weui-cells weui-cells_after-title">
 
@@ -18,13 +18,13 @@
     </view>
 
     <view class="weui-cells__title">
-      地址
+      调查点位置
     </view>
     <view class="weui-cells weui-cells_after-title">
 
       <view class="weui-cell weui-cell_vcode">
         <view class="weui-cell__bd">
-          <textarea class="weui-textarea" value='{{adderss}}' placeholder="请输入地址" bindinput='bindinputAdderss' data-disasterindex='{{index}}' maxlength='200' style="height: 3.7em" />
+          <textarea class="weui-textarea" value='{{adderss}}' placeholder="请输入调查点位置" bindinput='bindinputAdderss' data-disasterindex='{{index}}' maxlength='200' style="height: 3.7em" />
           <view class="weui-textarea-counter">{{adderss.length}}/200</view>
         </view>
         <view class="weui-cell__ft" wx:if="{{adderss===''}}">
@@ -65,10 +65,33 @@
           <view class="weui-label">震级</view>
         </view>
         <view class="weui-cell__bd">
-          <picker bindchange="bindIntensityChange" data-disasterindex='{{index}}' value="{{intensityIndex}}" range="{{intensityRange}}">
-            <view class="weui-select weui-select_in-select-after">{{intensityRange[intensityIndex]}}</view>
-          </picker>
+          <input class="weui-input" value='{{intensityIndex}}' data-disasterindex='{{index}}' placeholder="请输入震级" bindinput='bindinputIntensityIndex' />
         </view>
+        <view class="weui-cell__ft" wx:if="{{intensityIndex===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+          <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label">烈度评定初步意见</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker bindchange="bindPooeoiChange" data-disasterindex='{{index}}' value="{{pooeoiIndex}}" range="{{pooeoiRange}}">
+              <view class="weui-select weui-select_in-select-after">{{pooeoiRange[pooeoiIndex]}}</view>
+            </picker>
+          </view>
+      </view>
+
+      <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+          <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label">烈度综合评定</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker bindchange="bindCeoiChange" data-disasterindex='{{index}}' value="{{ceoiIndex}}" range="{{ceoiRange}}">
+              <view class="weui-select weui-select_in-select-after">{{ceoiRange[ceoiIndex]}}</view>
+            </picker>
+          </view>
       </view>
 
       <view class="weui-cell weui-cell_input weui-cell_vcode">
@@ -85,7 +108,7 @@
 
       <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
         <view class="weui-cell__hd weui-cell__hd_in-select-after">
-          <view class="weui-label">地质灾害类型</view>
+          <view class="weui-label">地震地质灾害类型</view>
         </view>
         <view class="weui-cell__bd">
           <picker bindchange="bindTypeChange" data-disasterindex='{{index}}' value="{{typeIndex}}" range="{{typeRange}}">
@@ -96,7 +119,7 @@
 
       <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
         <view class="weui-cell__hd weui-cell__hd_in-select-after">
-          <view class="weui-label">地质灾害形态</view>
+          <view class="weui-label">地震地质灾害形态</view>
         </view>
         <view class="weui-cell__bd">
           <picker bindchange="bindShapeChange" data-disasterindex='{{index}}' value="{{shapeIndex}}" range="{{shapeRange}}">
@@ -107,10 +130,10 @@
 
       <view class="weui-cell weui-cell_input weui-cell_vcode">
         <view class="weui-cell__hd">
-          <view class="weui-label">地质灾害大小</view>
+          <view class="weui-label">地震地质灾害大小</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" value='{{size}}' data-disasterindex='{{index}}' placeholder="请输地质灾害大小" bindinput='bindinputSize' />
+          <input class="weui-input" value='{{size}}' data-disasterindex='{{index}}' placeholder="地震地质灾害大小" bindinput='bindinputSize' />
         </view>
         <view class="weui-cell__ft" wx:if="{{size===''}}">
           <icon type="warn" size="23" color="#E64340"></icon>
@@ -174,35 +197,7 @@
       </view>
     </view>
 
-    <view class="weui-cells__title">
-      烈度评定初步意见
-    </view>
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_vcode">
-        <view class="weui-cell__bd">
-          <textarea class="weui-textarea" value='{{pooeoi}}' placeholder="请输入烈度评定初步意见" bindinput='bindinputpooeoi' data-disasterindex='{{index}}' maxlength='200' style="height: 3.7em" />
-          <view class="weui-textarea-counter">{{pooeoi.length}}/200</view>
-        </view>
-        <view class="weui-cell__ft" wx:if="{{pooeoi===''}}">
-          <icon type="warn" size="23" color="#E64340"></icon>
-        </view>
-      </view>
-    </view>
 
-    <view class="weui-cells__title">
-      烈度综合评定
-    </view>
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_vcode">
-        <view class="weui-cell__bd">
-          <textarea class="weui-textarea" value='{{ceoi}}' placeholder="请输入烈度综合评定" bindinput='bindinputceoi' data-disasterindex='{{index}}' maxlength='200' style="height: 3.7em" />
-          <view class="weui-textarea-counter">{{ceoi.length}}/200</view>
-        </view>
-        <view class="weui-cell__ft" wx:if="{{ceoi===''}}">
-          <icon type="warn" size="23" color="#E64340"></icon>
-        </view>
-      </view>
-    </view>
 
 
 
@@ -704,18 +699,117 @@
         </view>
       </view>
     </view>
+    <view>
       <view class="weui-cells__title">
-        <view class="weui-badge" style='background-color:#e64340;'>输入“del”来移除本调查点</view>
+        备注
       </view>
-      <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell weui-cell_input weui-cell_access">
-          <view class="weui-cell__bd modify_bd">
-            <input class="weui-input" bindinput='bindStatus' data-disasterindex='{{index}}' placeholder="请输入：del" />
+      <radio-group bindchange="remarksfileTypeChange" data-disasterindex='{{index}}'>
+        <view class="flex_box">
+          <view class="flex_item">
+            <label class="{{remarksfileType==='image'?'active':''}}">
+              <radio value='image' checked='{{remarksfileType==="image"}}'>照片</radio>
+            </label>
           </view>
-          <view class="weui-cell__ft" wx:if="{{status==='del'}}">
-            <view class="weui-badge" style='background-color:#e64340;' bindtap='removeSurvey' data-disasterindex='{{index}}'>点击移除</view>
+          <view class="flex_item">
+            <label class="{{remarksfileType==='video'?'active':''}}">
+              <radio value='video' checked='{{remarksfileType==="video"}}'>视频</radio>
+            </label>
+          </view>
+          <view class="flex_item">
+            <label class="{{remarksfileType==='audio'?'active':''}}">
+              <radio value='audio' checked='{{remarksfileType==="audio"}}'>录音</radio>
+            </label>
+          </view>
+        </view>
+      </radio-group>
+      <view class="weui-cells" wx:if="{{remarksfileType==='image'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">图片上传</view>
+                <view class="weui-uploader__info">{{remarksImages.length}}/9</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderremarksImages">
+                  <block wx:for="{{remarksImages}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" data-target='remarksImages' data-index='{{idx}}' data-disasterindex='{{index}}' catchlongpress='delData' id="{{itemName}}">
+                      <image class="weui-uploader__img" src="{{itemName}}" mode="aspectFill" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{remarksImages.length<9}}">
+                  <view class="weui-uploader__input" data-disasterindex='{{index}}' bindtap="chooseImage" data-upname='remarksImages'></view>
+                </view>
+              </view>
+            </view>
           </view>
         </view>
       </view>
+      <view class="weui-cells" wx:if="{{remarksfileType==='video'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">视频上传</view>
+                <view class="weui-uploader__info">{{remarksVideos.length}}/3</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderremarksVideos">
+                  <block wx:for="{{remarksVideos}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" catchlongpress='delData' data-target='remarksVideos' data-index='{{idx}}' data-disasterindex='{{index}}' id="{{itemName}}">
+                      <video class="weui-uploader__img" src="{{itemName}}" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{remarksVideos.length<3}}">
+                  <view class="weui-uploader__input" data-disasterindex='{{index}}' bindtap="chooseVideo" data-upname='remarksVideos'></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells" wx:if="{{remarksfileType==='audio'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">录音上传</view>
+                <view class="weui-uploader__info">{{remarksAudios.length}}/5</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderremarksAudios">
+                  <block wx:for="{{remarksAudios}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" id="{{itemName}}" data-target='remarksAudios' data-index='{{idx}}' data-disasterindex='{{index}}' catchlongpress='delData'>
+                      <audio src="{{itemName}}" name='录音{{idx+1}}' controls/>
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{remarksAudios.length<5}}">
+                  <view class="button-sp-area">
+                    <button class="weui-btn btnprimary" bindtap="chooseAudio" data-index='{{idx}}' data-disasterindex='{{index}}' wx:if="{{!remarksisRecoding}}" data-upname='remarksAudios'>点击开始录音</button>
+                    <button class="weui-btn" type="warn" bindtap="stopAudio" data-index='{{idx}}' data-disasterindex='{{index}}' wx:if="{{remarksisRecoding}}" data-upname='remarksAudios' plain="true">点击停止录音</button>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__title">
+      <view class="weui-badge" style='background-color:#e64340;'>输入“del”来移除本调查点</view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input weui-cell_access">
+        <view class="weui-cell__bd modify_bd">
+          <input class="weui-input" bindinput='bindStatus' data-disasterindex='{{index}}' placeholder="请输入：del" />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{status==='del'}}">
+          <view class="weui-badge" style='background-color:#e64340;' bindtap='removeSurvey' data-disasterindex='{{index}}'>点击移除</view>
+        </view>
+      </view>
+    </view>
   </view>
 </template>

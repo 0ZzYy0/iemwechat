@@ -2,7 +2,7 @@
 <import src="disasterTemplate.wxml" />
 <view class='page'>
   <view class="page__hd">
-    <view class="page__title">地址灾害调查——房屋震害</view>
+    <view class="page__title">地质灾害调查——房屋震害</view>
   </view>
 
 
