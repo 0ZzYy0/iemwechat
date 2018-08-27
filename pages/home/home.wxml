@@ -73,7 +73,7 @@
           <image src='/images/anquanjianding.png' mode='aspectFit'></image>
         </view>
         <view class='block6' bindtap='binddizhizaihaidiaocha'>
-          <image src='/images/yinpingongneng.png' mode='aspectFit'></image>
+          <image src='/images/dzzhdc1.jpg' mode='aspectFit'></image>
         </view>
         <view class='block7'>
           安全鉴定
