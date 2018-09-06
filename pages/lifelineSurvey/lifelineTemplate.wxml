@@ -83,7 +83,6 @@
       </view>
 
       <view class="weui-cells__title">主要结构形式</view>
-      <view class="weui-cells weui-cells_after-title">
         <checkbox-group bindchange="checkboxMSFChange" data-lifelineindex='{{index}}'>
           <label class="weui-cell weui-check__label" wx:for="{{msf}}" wx:key="name">
             <checkbox class="weui-check" value="{{item.name}}" checked="{{item.checked}}" />
@@ -94,14 +93,13 @@
             <view class="weui-cell__bd">{{item.name}}</view>
           </label>
         </checkbox-group>
-      </view>
       
       <view data-mid='{{mid}}' bindtap='navigateToMonomers' class="weui-cell weui-cell_access" hover-class="weui-cell_active" data-lifelineindex='{{index}}'>
         <view class="weui-cell__bd">结构单体调查</view>
         <view class="weui-cell__ft weui-cell__ft_in-access">点击进入</view>
       </view>
 
-      <view data-eid='{{eid}}' bindtap='navigateToComprehensive' class="weui-cell weui-cell_access" hover-class="weui-cell_active" data-lifelineindex='{{index}}'>
+      <view data-eid='{{eid}}' bindtap='' class="weui-cell weui-cell_access" hover-class="weui-cell_active" data-lifelineindex='{{index}}'>
         <view class="weui-cell__bd">系统全面调查</view>
         <view class="weui-cell__ft weui-cell__ft_in-access">点击进入</view>
       </view>
