@@ -42,6 +42,9 @@ Page({
       })
       return;
     }
+    if (!(group.isLeader === "是") && !(group.isLeader === "否")) {
+      group.isLeader = "是";
+    }
     if (group.isLeader === "是" || group.isLeader === "否") {
       group.customerId = app.globalData.customer.id;
       group.earthquakeId = that.data.earthquakeId;
@@ -90,9 +93,7 @@ Page({
     let isLeader = that.data.isLeader;
     let isLeaderIndex = that.data.isLeaderIndex;
     let isLeaderRange = that.data.isLeaderRange;
-    console.log(isLeader);
     isLeader = isLeaderRange[e.detail.value];
-    console.log(isLeader);
     let cxtgroup = that.data.group;
     cxtgroup.isLeader = isLeader;
 
@@ -101,16 +102,15 @@ Page({
       isLeader: isLeader,
       group: cxtgroup
     });
-    console.log(that.data.group); 
   },
   bindEQChange: function(e) {
-    console.log('picker发生change事件，携带value值为：', e);
-    let that = this;
+
+    var that = this;
     let items = that.data.items;
 
     let earthquakeId = items[e.detail.value].id;
     wx.setStorageSync('earthquake', items[e.detail.value])
-    console.log(earthquakeId)
+
     that.setData({
       itemsIndex: e.detail.value,
       earthquakeId: earthquakeId,
@@ -128,6 +128,20 @@ Page({
         'Cookie': 'JSESSIONID=' + app.globalData.JSESSIONID
       },
       success: function(res) {
+        let isLeader = "";
+        let isLeaderIndex;
+        if (res.data.isLeader == "是"){
+          isLeader = "是";
+          isLeaderIndex = 0;
+        }else{
+          isLeader = "否";
+          isLeaderIndex = 1;
+        }
+
+        that.setData({
+          isLeader: isLeader,
+          isLeaderIndex: isLeaderIndex
+        })
         that.setData({
           group: res.data ? res.data : {}
         })
@@ -155,7 +169,7 @@ Page({
       return;
     }
     if (!that.data.group.id || !that.data.group.isLeader || !that.data.group.groupNumbering) {
-      console.log(that.data.group)
+
       wx.showModal({
         title: '操作失败',
         content: '请先完善小组信息',
@@ -177,7 +191,7 @@ Page({
       return;
     }
     if (!that.data.group.id || !that.data.group.isLeader || !that.data.group.groupNumbering) {
-      console.log(that.data.group)
+
       wx.showModal({
         title: '操作失败',
         content: '请先完善小组信息',
@@ -201,7 +215,7 @@ Page({
       return;
     }
     if (!that.data.group.id || !that.data.group.isLeader || !that.data.group.groupNumbering) {
-      console.log(that.data.group)
+
       wx.showModal({
         title: '操作失败',
         content: '请先完善小组信息',
@@ -223,7 +237,7 @@ Page({
       return;
     }
     if (!that.data.group.id || !that.data.group.isLeader || !that.data.group.groupNumbering) {
-      console.log(that.data.group)
+
       wx.showModal({
         title: '操作失败',
         content: '请先完善小组信息',
@@ -245,7 +259,7 @@ Page({
       return;
     }
     if (!that.data.group.id || !that.data.group.isLeader || !that.data.group.groupNumbering) {
-      console.log(that.data.group)
+
       wx.showModal({
         title: '操作失败',
         content: '请先完善小组信息',
@@ -256,13 +270,35 @@ Page({
       url: '/pages/sfasslist/sfasslist?earthquakeId=' + that.data.earthquakeId
     })
   },
+
+  //生命线调查
+  bindshengmingxian: function () {
+    var that = this;
+    if (!that.data.earthquakeId) {
+      wx.showModal({
+        title: '操作失败',
+        content: '请先选择地震信息',
+      });
+      return;
+    }
+    if (!that.data.group.id || !that.data.group.isLeader || !that.data.group.groupNumbering) {
+      wx.showModal({
+        title: '操作失败',
+        content: '请先完善小组信息',
+      });
+      return;
+    }
+    wx.navigateTo({
+      url: '/pages/lifelineSurvey/lifelineSurvey?earthquakeId=' + that.data.earthquakeId
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     var that = this;
     app.getCustomerInfo().then(function(res) {
-      console.log(res.data);
+
       if (res.data.customer.registered === 'no') {
         wx.redirectTo({
           url: '/pages/userinfo/userinfo',
@@ -285,13 +321,12 @@ Page({
         success: function(res) {
           let earthquakes = [];
           let items = res.data.earthquakes;
-          console.log(res.data)
+
           items.reverse();
           items.forEach(function(n) {
             earthquakes.push(n.name)
           })
-          console.log(res.data.group);
-          console.log(res.data.group);
+
           let isLeader = that.data.isLeader;
           let isLeaderRange = that.data.isLeaderRange;
           let isLeaderIndex = that.data.isLeaderIndex;
@@ -330,7 +365,6 @@ Page({
       })
 
     }, function(res) {
-      console.log(res)
       wx.reLaunch({
         url: '/pages/home/home',
       })

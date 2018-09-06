@@ -1,0 +1,224 @@
+<template name="lifelineTemplate">
+  <view class='lifelineTemplate'>
+
+    <view class="weui-cells__title">
+      <view class="weui-badge">{{index+1}}、</view>调查名称
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+
+      <view class="weui-cell weui-cell_vcode">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" value='{{name}}' placeholder="请输入调查名称" bindinput='bindinputName' data-lifelineindex='{{index}}' maxlength='200' style="height: 3.7em" />
+          <view class="weui-textarea-counter">{{name.length}}/200</view>
+        </view>
+        <view class="weui-cell__ft" wx:if="{{name===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">
+      调查位置
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+
+      <view class="weui-cell weui-cell_vcode">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" value='{{adderss}}' placeholder="请输调查入位置" bindinput='bindinputAdderss' data-lifelineindex='{{index}}' maxlength='200' style="height: 3.7em" />
+          <view class="weui-textarea-counter">{{adderss.length}}/200</view>
+        </view>
+        <view class="weui-cell__ft" wx:if="{{adderss===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">经度</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{lng}}' data-lifelineindex='{{index}}' placeholder="请输入经度" bindinput='bindinputLng' />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{lng===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">纬度</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{lat}}' data-lifelineindex='{{index}}' placeholder="请输入纬度" bindinput='bindinputLat' />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{lat===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">时间</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{time}}' data-lifelineindex='{{index}}' placeholder="请输入时间" bindinput='bindinputTime' />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{time===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">各系统地震破坏的相互影响</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value='{{interact}}' data-lifelineindex='{{index}}' placeholder="请填写相互影响" bindinput='bindinputInteract' />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{interact===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+
+      <view class="weui-cells__title">主要结构形式</view>
+      <view class="weui-cells weui-cells_after-title">
+        <checkbox-group bindchange="checkboxMSFChange" data-lifelineindex='{{index}}'>
+          <label class="weui-cell weui-check__label" wx:for="{{msf}}" wx:key="name">
+            <checkbox class="weui-check" value="{{item.name}}" checked="{{item.checked}}" />
+            <view class="weui-cell__hd weui-check__hd_in-checkbox">
+              <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+              <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+            </view>
+            <view class="weui-cell__bd">{{item.name}}</view>
+          </label>
+        </checkbox-group>
+      </view>
+      
+      <view data-mid='{{mid}}' bindtap='navigateToMonomers' class="weui-cell weui-cell_access" hover-class="weui-cell_active" data-lifelineindex='{{index}}'>
+        <view class="weui-cell__bd">结构单体调查</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">点击进入</view>
+      </view>
+
+      <view data-eid='{{eid}}' bindtap='navigateToComprehensive' class="weui-cell weui-cell_access" hover-class="weui-cell_active" data-lifelineindex='{{index}}'>
+        <view class="weui-cell__bd">系统全面调查</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">点击进入</view>
+      </view>
+    </view>
+
+    <view>
+      <view class="weui-cells__title">
+        附件
+      </view>
+      <radio-group bindchange="fileTypeChange" data-lifelineindex='{{index}}'>
+        <view class="flex_box">
+          <view class="flex_item">
+            <label class="{{fileType==='image'?'active':''}}">
+              <radio value='image' checked='{{fileType==="image"}}'>照片</radio>
+            </label>
+          </view>
+          <view class="flex_item">
+            <label class="{{fileType==='video'?'active':''}}">
+              <radio value='video' checked='{{fileType==="video"}}'>视频</radio>
+            </label>
+          </view>
+          <view class="flex_item">
+            <label class="{{fileType==='audio'?'active':''}}">
+              <radio value='audio' checked='{{fileType==="audio"}}'>录音</radio>
+            </label>
+          </view>
+        </view>
+      </radio-group>
+      <view class="weui-cells" wx:if="{{fileType==='image'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">图片上传</view>
+                <view class="weui-uploader__info">{{images.length}}/9</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderimages">
+                  <block wx:for="{{images}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" data-target='images' data-index='{{idx}}' data-lifelineindex='{{index}}' catchlongpress='delData' id="{{itemName}}">
+                      <image class="weui-uploader__img" src="{{itemName}}" mode="aspectFill" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{images.length<9}}">
+                  <view class="weui-uploader__input" data-lifelineindex='{{index}}' bindtap="chooseImage" data-upname='images'></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells" wx:if="{{fileType==='video'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">视频上传</view>
+                <view class="weui-uploader__info">{{videos.length}}/3</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploadervideos">
+                  <block wx:for="{{videos}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" catchlongpress='delData' data-target='videos' data-index='{{idx}}' data-lifelineindex='{{index}}' id="{{itemName}}">
+                      <video class="weui-uploader__img" src="{{itemName}}" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{videos.length<3}}">
+                  <view class="weui-uploader__input" data-lifelineindex='{{index}}' bindtap="chooseVideo" data-upname='videos'></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells" wx:if="{{fileType==='audio'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">录音上传</view>
+                <view class="weui-uploader__info">{{audios.length}}/5</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderaudios">
+                  <block wx:for="{{audios}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" id="{{itemName}}" data-target='audios' data-index='{{idx}}' data-lifelineindex='{{index}}' catchlongpress='delData'>
+                      <audio src="{{itemName}}" name='录音{{idx+1}}' controls/>
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{audios.length<5}}">
+                  <view class="button-sp-area">
+                    <button class="weui-btn btnprimary" bindtap="chooseAudio" data-index='{{idx}}' data-lifelineindex='{{index}}' wx:if="{{!isRecoding}}" data-upname='audios'>点击开始录音</button>
+                    <button class="weui-btn" type="warn" bindtap="stopAudio" data-index='{{idx}}' data-lifelineindex='{{index}}' wx:if="{{isRecoding}}" data-upname='audios' plain="true">点击停止录音</button>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">
+      <view class="weui-badge" style='background-color:#e64340;'>输入“del”来移除本节点</view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input weui-cell_access">
+        <view class="weui-cell__bd modify_bd">
+          <input class="weui-input" bindinput='bindStatus' data-lifelineindex='{{index}}' placeholder="请输入：del" />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{status==='del'}}">
+          <view class="weui-badge" style='background-color:#e64340;' bindtap='removeSurvey' data-lifelineindex='{{index}}'>点击移除</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

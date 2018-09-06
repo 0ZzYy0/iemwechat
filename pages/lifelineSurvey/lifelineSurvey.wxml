@@ -1,0 +1,30 @@
+<!--pages/lifelineSurvey/lifelineSurvey.wxml-->
+<import src="lifelineTemplate.wxml" />
+<view class='page'>
+  <view class="page__hd">
+    <view class="page__title">生命线工程震害调查</view>
+  </view>
+
+
+
+  <view class="page__bd">
+    <block wx:for="{{lifelineLists}}" wx:key="{{index}}">
+      <template is="lifelineTemplate" data="{{...item}}" />
+    </block>
+
+
+
+    <view class='box'>
+
+      <view class='add' bindtap='addsurvey'>
+        <image src='/images/add.png' style='width:44px;height:44px;margin-top:15px;' mode='aspectFit'></image>
+      </view>
+      <view class='save' >
+        <view class="weui-btn-area">
+          <button class="weui-btn" type="primary" bindtap="saveAll">保存所有</button>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>

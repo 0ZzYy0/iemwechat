@@ -1,0 +1,526 @@
+<template name="monomersTemplate">
+  <view class='monomersTemplate'>
+
+    <view class="weui-cells__title">
+      <view class="weui-badge">{{index+1}}、</view>设施名称
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+
+      <view class="weui-cell weui-cell_vcode">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" value='{{name}}' placeholder="请输入设施名称" bindinput='bindinputName' data-monomerssurveyindex='{{index}}' maxlength='200' style="height: 3.7em" />
+          <view class="weui-textarea-counter">{{name.length}}/200</view>
+        </view>
+        <view class="weui-cell__ft" wx:if="{{name===''}}">
+          <icon type="warn" size="23" color="#E64340"></icon>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">
+      调查位置
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+
+    <view class="weui-cell weui-cell_vcode">
+      <view class="weui-cell__bd">
+        <textarea class="weui-textarea" value='{{adderss}}' placeholder="请输调查入位置" bindinput='bindinputAdderss' data-monomerssurveyindex='{{index}}' maxlength='200' style="height: 3.7em" />
+        <view class="weui-textarea-counter">{{adderss.length}}/200</view>
+      </view>
+      <view class="weui-cell__ft" wx:if="{{adderss===''}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">经度</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" value='{{lng}}' data-monomerssurveyindex='{{index}}' placeholder="请输入经度" bindinput='bindinputLng' />
+      </view>
+      <view class="weui-cell__ft" wx:if="{{lng===''}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+
+
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">纬度</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" value='{{lat}}' data-monomerssurveyindex='{{index}}' placeholder="请输入纬度" bindinput='bindinputLat' />
+      </view>
+      <view class="weui-cell__ft" wx:if="{{lat===''}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">时间</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" value='{{time}}' data-monomerssurveyindex='{{index}}' placeholder="请输入时间" bindinput='bindinputTime' />
+      </view>
+      <view class="weui-cell__ft" wx:if="{{time===''}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+  </view>
+
+
+
+    <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">主要结构形式</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindMsfChange" data-monomerssurveyindex='{{index}}' value="{{msfIndex}}" range="{{msfRange}}">
+            <view class="weui-select weui-select_in-select-after">{{msfRange[msfIndex]}}</view>
+          </picker>
+        </view>
+    </view>
+
+    <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">破坏前状况</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindPdcChange" data-monomerssurveyindex='{{index}}' value="{{pdcIndex}}" range="{{pdcRange}}">
+            <view class="weui-select weui-select_in-select-after">{{pdcRange[pdcIndex]}}</view>
+          </picker>
+        </view>
+    </view>
+  
+    <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">破坏等级</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindDamageGradeChange" data-monomerssurveyindex='{{index}}' value="{{damageGradeIndex}}" range="{{damageGradeRange}}">
+            <view class="weui-select weui-select_in-select-after">{{damageGradeRange[damageGradeIndex]}}</view>
+          </picker>
+        </view>
+    </view>
+
+    <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">设防烈度</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindFortificationIntensityChange" data-monomerssurveyindex='{{index}}' value="{{fortificationIntensityIndex}}" range="{{fortificationIntensityRange}}">
+            <view class="weui-select weui-select_in-select-after">{{fortificationIntensityRange[fortificationIntensityIndex]}}</view>
+          </picker>
+        </view>
+    </view>
+
+    <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">场地类别</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindSiteCategoryChange" data-monomerssurveyindex='{{index}}' value="{{siteCategoryIndex}}" range="{{siteCategoryRange}}">
+            <view class="weui-select weui-select_in-select-after">{{siteCategoryRange[siteCategoryIndex]}}</view>
+          </picker>
+        </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">建造材料</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" value='{{buildingMaterials}}' data-monomerssurveyindex='{{index}}' placeholder="请输入建造材料" bindinput='bindinputBuildingMaterials' />
+      </view>
+      <view class="weui-cell__ft" wx:if="{{buildingMaterials===''}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">建筑年代</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" value='{{architecturalAge}}' data-monomerssurveyindex='{{index}}' placeholder="请输入建筑年代" bindinput='bindinputArchitecturalAge' />
+      </view>
+      <view class="weui-cell__ft" wx:if="{{architecturalAge===''}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">地震烈度</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindEarthquakeIntensityChange" data-monomerssurveyindex='{{index}}' value="{{earthquakeIntensityIndex}}" range="{{earthquakeIntensityRange}}">
+            <view class="weui-select weui-select_in-select-after">{{earthquakeIntensityRange[earthquakeIntensityIndex]}}</view>
+          </picker>
+        </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">中断时间</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" value='{{interruptionTime}}' data-monomerssurveyindex='{{index}}' placeholder="请输入中断时间" bindinput='bindinputInterruptionTime' />
+      </view>
+      <view class="weui-cell__ft" wx:if="{{interruptionTime===''}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">恢复时间</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" value='{{recoveryTime}}' data-monomerssurveyindex='{{index}}' placeholder="请输入恢复时间" bindinput='bindinputRecoveryTime' />
+      </view>
+      <view class="weui-cell__ft" wx:if="{{recoveryTime===''}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">中断期间对应急救灾的影响</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" value='{{ioipoer}}' data-monomerssurveyindex='{{index}}' placeholder="请输入" bindinput='bindinputIoipoer' />
+      </view>
+      <view class="weui-cell__ft" wx:if="{{ioipoer===''}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">引起生命线工程震害的主要原因</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindMcoedtleChange" data-monomerssurveyindex='{{index}}' value="{{mcoedtleIndex}}" range="{{mcoedtleRange}}">
+            <view class="weui-select weui-select_in-select-after">{{mcoedtleRange[mcoedtleIndex]}}</view>
+          </picker>
+        </view>
+    </view>
+
+    <view class="weui-cells" wx:if="{{msf==='给（排）水系统'}}">
+      <view class="weui-cells weui-cells_after-title">
+
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">水池或水处理池</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindPowtpChange" data-monomerssurveyindex='{{index}}' value="{{powtpIndex}}" range="{{powtpRange}}">
+                <view class="weui-select weui-select_in-select-after">{{powtpRange[powtpIndex]}}</view>
+              </picker>
+            </view>
+        </view>
+
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">水厂处理</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindWtpChange" data-monomerssurveyindex='{{index}}' value="{{wtpIndex}}" range="{{wtpRange}}">
+                <view class="weui-select weui-select_in-select-after">{{wtpRange[wtpIndex]}}</view>
+              </picker>
+            </view>
+        </view>
+
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">取水井站及供水泵站</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindIwsawspsChange" data-monomerssurveyindex='{{index}}' value="{{iwsawspsIndex}}" range="{{iwsawspsRange}}">
+                <view class="weui-select weui-select_in-select-after">{{iwsawspsRange[iwsawspsIndex]}}</view>
+              </picker>
+            </view>
+        </view>
+
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">供水管网</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindWsnChange" data-monomerssurveyindex='{{index}}' value="{{wsnIndex}}" range="{{wsnRange}}">
+                <view class="weui-select weui-select_in-select-after">{{wsnRange[wsnIndex]}}</view>
+              </picker>
+            </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells" wx:if="{{msf==='燃气系统'}}">
+
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">门站</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindGateStationChange" data-monomerssurveyindex='{{index}}' value="{{gateStationIndex}}" range="{{gateStationRange}}">
+                <view class="weui-select weui-select_in-select-after">{{gateStationRange[gateStationIndex]}}</view>
+              </picker>
+            </view>
+        </view>
+
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">储气罐</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindGstChange" data-monomerssurveyindex='{{index}}' value="{{gstIndex}}" range="{{gstRange}}">
+                <view class="weui-select weui-select_in-select-after">{{gstRange[gstIndex]}}</view>
+              </picker>
+            </view>
+        </view>
+
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">输气管线</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindGtpChange" data-monomerssurveyindex='{{index}}' value="{{gtpIndex}}" range="{{gtpRange}}">
+                <view class="weui-select weui-select_in-select-after">{{gtpRange[gtpIndex]}}</view>
+              </picker>
+            </view>
+        </view>
+
+    </view>
+
+    <view class="weui-cells" wx:if="{{msf==='交通系统'}}">
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">道路</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindRoadChange" data-monomerssurveyindex='{{index}}' value="{{roadIndex}}" range="{{roadRange}}">
+                <view class="weui-select weui-select_in-select-after">{{roadRange[roadIndex]}}</view>
+              </picker>
+            </view>
+        </view>
+
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">桥梁</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindBridgeChange" data-monomerssurveyindex='{{index}}' value="{{bridgeIndex}}" range="{{bridgeRange}}">
+                <view class="weui-select weui-select_in-select-after">{{bridgeRange[bridgeIndex]}}</view>
+              </picker>
+            </view>
+        </view>
+
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">隧道</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindTunnelChange" data-monomerssurveyindex='{{index}}' value="{{tunnelIndex}}" range="{{tunnelRange}}">
+                <view class="weui-select weui-select_in-select-after">{{tunnelRange[tunnelIndex]}}</view>
+              </picker>
+            </view>
+        </view>
+
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">铁道线路</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindRailwayLineChange" data-monomerssurveyindex='{{index}}' value="{{railwayLineIndex}}" range="{{railwayLineRange}}">
+                <view class="weui-select weui-select_in-select-after">{{railwayLineRange[railwayLineIndex]}}</view>
+              </picker>
+            </view>
+        </view>
+    </view>
+
+    <view class="weui-cells" wx:if="{{msf==='电力系统'}}">
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">发电厂</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindPowerPlantChange" data-monomerssurveyindex='{{index}}' value="{{powerPlantIndex}}" range="{{powerPlantRange}}">
+                <view class="weui-select weui-select_in-select-after">{{powerPlantRange[powerPlantIndex]}}</view>
+              </picker>
+            </view>
+        </view>
+
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">变（配）电站</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindSubstationChange" data-monomerssurveyindex='{{index}}' value="{{substationIndex}}" range="{{substationRange}}">
+                <view class="weui-select weui-select_in-select-after">{{substationRange[substationIndex]}}</view>
+              </picker>
+            </view>
+        </view>
+
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">输电线路</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindTransmissionLineChange" data-monomerssurveyindex='{{index}}' value="{{transmissionLineIndex}}" range="{{transmissionLineRange}}">
+                <view class="weui-select weui-select_in-select-after">{{transmissionLineRange[transmissionLineIndex]}}</view>
+              </picker>
+            </view>
+        </view>
+
+
+
+
+
+    </view>
+
+    <view class="weui-cells" wx:if="{{msf==='广播通信系统'}}">
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">中心控制室</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindCentralControlRoomChange" data-monomerssurveyindex='{{index}}' value="{{centralControlRoomIndex}}" range="{{centralControlRoomRange}}">
+                <view class="weui-select weui-select_in-select-after">{{centralControlRoomRange[centralControlRoomIndex]}}</view>
+              </picker>
+            </view>
+        </view>
+
+        <view class="weui-cell weui-cell_select" hover-class="weui-cell_active">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">通信线路</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindCommunicationLineChange" data-monomerssurveyindex='{{index}}' value="{{communicationLineIndex}}" range="{{communicationLineRange}}">
+                <view class="weui-select weui-select_in-select-after">{{communicationLineRange[communicationLineIndex]}}</view>
+              </picker>
+            </view>
+        </view>
+    </view>
+    
+
+    <view>
+      <view class="weui-cells__title">
+        附件
+      </view>
+      <radio-group bindchange="fileTypeChange" data-monomerssurveyindex='{{index}}'>
+        <view class="flex_box">
+          <view class="flex_item">
+            <label class="{{fileType==='image'?'active':''}}">
+              <radio value='image' checked='{{fileType==="image"}}'>照片</radio>
+            </label>
+          </view>
+          <view class="flex_item">
+            <label class="{{fileType==='video'?'active':''}}">
+              <radio value='video' checked='{{fileType==="video"}}'>视频</radio>
+            </label>
+          </view>
+          <view class="flex_item">
+            <label class="{{fileType==='audio'?'active':''}}">
+              <radio value='audio' checked='{{fileType==="audio"}}'>录音</radio>
+            </label>
+          </view>
+        </view>
+      </radio-group>
+      <view class="weui-cells" wx:if="{{fileType==='image'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">图片上传</view>
+                <view class="weui-uploader__info">{{images.length}}/9</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderimages">
+                  <block wx:for="{{images}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" data-target='images' data-index='{{idx}}' data-monomerssurveyindex='{{index}}' catchlongpress='delData' id="{{itemName}}">
+                      <image class="weui-uploader__img" src="{{itemName}}" mode="aspectFill" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{images.length<9}}">
+                  <view class="weui-uploader__input" data-monomerssurveyindex='{{index}}' bindtap="chooseImage" data-upname='images'></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells" wx:if="{{fileType==='video'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">视频上传</view>
+                <view class="weui-uploader__info">{{videos.length}}/3</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploadervideos">
+                  <block wx:for="{{videos}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" catchlongpress='delData' data-target='videos' data-index='{{idx}}' data-monomerssurveyindex='{{index}}' id="{{itemName}}">
+                      <video class="weui-uploader__img" src="{{itemName}}" />
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{videos.length<3}}">
+                  <view class="weui-uploader__input" data-monomerssurveyindex='{{index}}' bindtap="chooseVideo" data-upname='videos'></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells" wx:if="{{fileType==='audio'}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">录音上传</view>
+                <view class="weui-uploader__info">{{audios.length}}/5</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderaudios">
+                  <block wx:for="{{audios}}" wx:key="*this" wx:for-index="idx" wx:for-item="itemName">
+                    <view class="weui-uploader__file" id="{{itemName}}" data-target='audios' data-index='{{idx}}' data-monomerssurveyindex='{{index}}' catchlongpress='delData'>
+                      <audio src="{{itemName}}" name='录音{{idx+1}}' controls/>
+                    </view>
+                  </block>
+                </view>
+                <view wx:if="{{audios.length<5}}">
+                  <view class="button-sp-area">
+                    <button class="weui-btn btnprimary" bindtap="chooseAudio" data-index='{{idx}}' data-monomerssurveyindex='{{index}}' wx:if="{{!isRecoding}}" data-upname='audios'>点击开始录音</button>
+                    <button class="weui-btn" type="warn" bindtap="stopAudio" data-index='{{idx}}' data-monomerssurveyindex='{{index}}' wx:if="{{isRecoding}}" data-upname='audios' plain="true">点击停止录音</button>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">
+      <view class="weui-badge" style='background-color:#e64340;'>输入“del”来移除本节点</view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input weui-cell_access">
+        <view class="weui-cell__bd modify_bd">
+          <input class="weui-input" bindinput='bindStatus' data-monomerssurveyindex='{{index}}' placeholder="请输入：del" />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{status==='del'}}">
+          <view class="weui-badge" style='background-color:#e64340;' bindtap='removeSurvey' data-monomerssurveyindex='{{index}}'>点击移除</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

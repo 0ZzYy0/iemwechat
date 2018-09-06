@@ -81,6 +81,18 @@
         <view class='block8' bindtap='binddizhizaihaidiaocha'>
           地质灾害调查
         </view>
+
+        <view class='block1' bindtap='bindshengmingxian'>
+          <image src='/images/zaiqingshangbao.png' mode='aspectFit'></image>
+        </view>
+        <view class='block2' bindtap=''>
+        </view>
+        <view class='block3'  bindtap='bindshengmingxian'>
+          生命线
+        </view>
+        <view class='block4' bindtap=''>
+
+        </view>
       </view>
     </view>
   </view>
