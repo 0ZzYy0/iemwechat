@@ -69,26 +69,29 @@
         <view class='block4' bindtap='bindliedudiaocha'>
           烈度调查
         </view>
+
+
         <view class='block5' bindtap='bindanquanjianding'>
           <image src='/images/anquanjianding.png' mode='aspectFit'></image>
         </view>
-        <view class='block6' bindtap='binddizhizaihaidiaocha'>
-          <image src='/images/dzzhdc1.jpg' mode='aspectFit'></image>
+        <view class='block6' bindtap='bindshengmingxian'>
+          
+          <image src='/images/zaiqingshangbao.png' mode='aspectFit'></image>
         </view>
         <view class='block7'>
           安全鉴定
         </view>
-        <view class='block8' bindtap='binddizhizaihaidiaocha'>
-          地质灾害调查
+        <view class='block8' bindtap='bindshengmingxian'>
+          生命线
         </view>
 
-        <view class='block1' bindtap='bindshengmingxian'>
-          <image src='/images/zaiqingshangbao.png' mode='aspectFit'></image>
+        <view class='block1' bindtap='binddizhizaihaidiaocha'>
+          <image src='/images/dzzhdc1.jpg' mode='aspectFit'></image>
         </view>
         <view class='block2' bindtap=''>
         </view>
-        <view class='block3'  bindtap='bindshengmingxian'>
-          生命线
+        <view class='block3'  bindtap='binddizhizaihaidiaocha'>
+          地质灾害调查
         </view>
         <view class='block4' bindtap=''>
 
