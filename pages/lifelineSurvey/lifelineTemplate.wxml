@@ -2,7 +2,7 @@
   <view class='lifelineTemplate'>
 
     <view class="weui-cells__title">
-      <view class="weui-badge">{{index+1}}、</view>调查名称
+      <view class="weui-badge">{{index+1}}、</view>调查点名称
     </view>
     <view class="weui-cells weui-cells_after-title">
 
@@ -18,7 +18,7 @@
     </view>
 
     <view class="weui-cells__title">
-      调查位置
+      调查点位置
     </view>
     <view class="weui-cells weui-cells_after-title">
 

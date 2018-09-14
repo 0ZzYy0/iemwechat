@@ -2,7 +2,7 @@
 <import src="sfasslisttemplate.wxml" />
 <view class='page'>
   <view class="page__hd">
-    <view class="page__title">安全鉴定</view>
+    <view class="page__title">房屋安全鉴定</view>
     <view class="page__desc">建筑物列表</view>
   </view>
 

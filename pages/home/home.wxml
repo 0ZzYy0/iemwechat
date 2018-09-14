@@ -75,23 +75,22 @@
           <image src='/images/anquanjianding.png' mode='aspectFit'></image>
         </view>
         <view class='block6' bindtap='bindshengmingxian'>
-          
-          <image src='/images/zaiqingshangbao.png' mode='aspectFit'></image>
+          <image src='/images/shengmingxian.jpg' mode='aspectFit'></image>
         </view>
         <view class='block7'>
-          安全鉴定
+          房屋安全鉴定
         </view>
         <view class='block8' bindtap='bindshengmingxian'>
-          生命线
+          生命线工程震害调查
         </view>
 
         <view class='block1' bindtap='binddizhizaihaidiaocha'>
-          <image src='/images/dzzhdc1.jpg' mode='aspectFit'></image>
+          <image src='/images/dizhendizhi.jpg' mode='aspectFit'></image>
         </view>
         <view class='block2' bindtap=''>
         </view>
         <view class='block3'  bindtap='binddizhizaihaidiaocha'>
-          地质灾害调查
+          地震地质灾害调查
         </view>
         <view class='block4' bindtap=''>
 

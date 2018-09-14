@@ -173,9 +173,9 @@ Page({
     monomersSurvey.fortificationIntensity = '6度';
 
     //场地类别 Site category
-    monomersSurvey.siteCategoryRange = ['1类', '2类', '3类', '4类'];
+    monomersSurvey.siteCategoryRange = ['I类', 'II类', 'III类', 'IV类'];
     monomersSurvey.siteCategoryIndex = 0;
-    monomersSurvey.siteCategory = '1类';
+    monomersSurvey.siteCategory = 'I类';
 
     //建造材料
     monomersSurvey.buildingMaterials = '';
@@ -1095,7 +1095,7 @@ Page({
     let pdcRange = ['轻度损坏', '已废弃', '完好'];
     let damageGradeRange = ['I级基本完好', 'II级轻微破坏', 'III中等破坏', 'IV严重破坏', 'V损坏'];
     let fortificationIntensityRange = ['6度', '7度', '8度', '9度'];
-    let siteCategoryRange = ['1类', '2类', '3类', '4类'];
+    let siteCategoryRange = ['I类', 'II类', 'III类', 'IV类'];
     let earthquakeIntensityRange = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
     let mcoedtleRange = ['强震动作用', '地面破坏（地基液化、沉降、滑坡、崩塌等)', '两者均有'];
     let powtpRange = ['I级基本完好', 'II级轻微破坏', 'III中等破坏', 'IV严重破坏', 'V损坏'];
