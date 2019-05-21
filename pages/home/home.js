@@ -160,6 +160,14 @@ Page({
   },
 
   bindliedudiaocha: function() {
+
+    wx.openSetting({
+      success(res) {
+        console.log("2222222");
+      }
+    })
+
+
     var that = this;
     if (!that.data.earthquakeId) {
       wx.showModal({
@@ -296,6 +304,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+
+
+
+    console.log("11111111a");
+
+
+
+
+
     var that = this;
     app.getCustomerInfo().then(function(res) {
 
