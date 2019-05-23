@@ -1,4 +1,4 @@
-//app.js
+//app.js，zy提交
 var server = "http://47.105.56.124";
 // var server = "http://localhost"
 
