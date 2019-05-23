@@ -161,11 +161,6 @@ Page({
 
   bindliedudiaocha: function() {
 
-
-
-
-
-
     wx.getSetting({ //检查已经有了的权限
       success: (response) => {
         console.log(response)
