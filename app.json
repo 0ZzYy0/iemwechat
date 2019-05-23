@@ -27,6 +27,11 @@
     "pages/lifelineComprehensive/lifelineComprehensive",
     "pages/lifelineMonomers/lifelineMonomers"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
   "tabBar": {
     "color": "#a8a8a8",
     "selectedColor": "#129fff",
@@ -56,5 +61,6 @@
     "navigationBarBackgroundColor": "#129fff",
     "backgroundColor": "#0097ff",
     "navigationBarTextStyle": "white"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

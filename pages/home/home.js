@@ -161,12 +161,25 @@ Page({
 
   bindliedudiaocha: function() {
 
-    wx.openSetting({
-      success(res) {
-        console.log("2222222");
+
+
+
+
+
+    wx.getSetting({ //检查已经有了的权限
+      success: (response) => {
+        console.log(response)
+        if (!response.authSetting['scope.userLocation']) {//对比需要的权限
+          console.log('123');
+          wx.authorize({
+            scope: 'scope.userLocation',//弹出  授权提示
+            success: () => {
+              console.log('yes')
+            }
+          })
+        }
       }
     })
-
 
     var that = this;
     if (!that.data.earthquakeId) {
